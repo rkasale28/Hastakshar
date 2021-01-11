@@ -6,6 +6,7 @@
 {% block content %}
     <form method="POST" class="form-group">
         {% csrf_token %}
+        <!-- <legend class="border-bottom mb-3">Create an Account</legend> -->
         {{form|crispy}}
         <p>Already have a HastAkshar account? <a href="/login/">Login instead</a>!</p>
         <button type="submit", class="btn btn-success">Register</button>     
