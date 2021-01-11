@@ -1,0 +1,15 @@
+{% extends "main/base.html" %}
+
+{% block title %}Account Login{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>Welcome back!</h1>
+    <form method="POST" class="form-group">
+        {% csrf_token %}
+        {{login_form|crispy}}
+        <p>Don't have a HastAkshar account? Create one for free <a href="/register/">here</a>!</p>
+        <button type="submit", class="btn btn-success" color=>Login</button>        
+    </form>
+
+{% endblock %}
