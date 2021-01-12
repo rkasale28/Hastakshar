@@ -5,38 +5,38 @@ from django.contrib.auth import login as auth_login, authenticate, logout as aut
 from django.contrib.auth.forms import AuthenticationForm 
 
 # Create your views here.
-def register(response):
-	if response.method == "POST":
-		form = RegisterForm(response.POST)
+def register(request):
+	if request.method == "POST":
+		form = RegisterForm(request.POST)
 		if form.is_valid():
 			form.save()
-			#messages.success(response, "Registration successful." )
+			#messages.success(request, "Registration successful." )
 			return redirect("/login")
-		#messages.error(response, "Unsuccessful registration. Invalid information.")
+		#messages.error(request, "Unsuccessful registration. Invalid information.")
 	else:
 		form = RegisterForm()
 		
-	return render(response, template_name="register/register.html", context={"register_form":form})
+	return render(request, template_name="register/register.html", context={"register_form":form})
 
-def login(response):
-	if response.method == "POST":
-		form = AuthenticationForm(response, data=response.POST)
+def login(request):
+	if request.method == "POST":
+		form = AuthenticationForm(request, data=request.POST)
 		if form.is_valid():
 			username = form.cleaned_data.get('username')
 			password = form.cleaned_data.get('password')
 			user = authenticate(username=username, password=password)
 			if user is not None:
-				auth_login(response, user)
-				# messages.info(response, f"You are now logged in as {username}.")
+				auth_login(request, user)
+				# messages.info(request, f"You are now logged in as {username}.")
 				return redirect("/home")
 			# else:
-			# 	messages.error(response,"Invalid username or password.")
+			# 	messages.error(request,"Invalid username or password.")
 		# else:
-		# 	messages.error(response,"Invalid username or password.")
+		# 	messages.error(request,"Invalid username or password.")
 	form = AuthenticationForm()
-	return render(response, template_name="register/login.html", context={"login_form":form})
+	return render(request, template_name="register/login.html", context={"login_form":form})
 
-def logout(response):
-	auth_logout(response)
-	#messages.info(response, "You have successfully logged out.") 
+def logout(request):
+	auth_logout(request)
+	#messages.info(request, "You have successfully logged out.") 
 	return redirect("/home")

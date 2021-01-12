@@ -24,5 +24,5 @@ urlpatterns = [
     path("logout/", v.logout, name= "logout"),
     path('', include("main.urls")),
     path('',include("django.contrib.auth.urls")),
-    
+
 ]
