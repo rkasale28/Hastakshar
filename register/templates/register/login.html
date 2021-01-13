@@ -5,7 +5,7 @@
 
 {% block content %}
     <h1>Welcome back!</h1>
-    <form method="POST" class="form-group">
+    <form method="POST" class="form-group" action="../login_submit">
         {% csrf_token %}
         {{login_form|crispy}}
         <p>Don't have a HastAkshar account? Create one for free <a href="/register/">here</a>!</p>

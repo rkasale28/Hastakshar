@@ -16,4 +16,11 @@ class UserForm(forms.Form):
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
-        fields=['profile_picture']
+        fields = ['profile_picture']
+
+class LoginForm(forms.ModelForm):
+    username = forms.CharField(max_length=25, label='Username', required=True)
+    password = forms.CharField(max_length=25, label='Password', required=True, widget=forms.PasswordInput())
+    class Meta:
+        model = hUser
+        fields = ['username', 'password']
