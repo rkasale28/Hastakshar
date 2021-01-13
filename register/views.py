@@ -32,16 +32,14 @@ def register_submit(request):
 				profile.save()
 				# If registration done directly redirect to home with login
 				# user = auth.authenticate(username=uname,password=pwd1)
-				# auth.login(request,user)
-				
-				return HttpResponse("Done")
-			
+				# auth.login(request,user)				
+				return redirect('/login')			
 			else:
-				return HttpResponse("Password don't match")
+				return redirect('/register') #"Password don't match" message.danger
 	
 	except IntegrityError as e:
 		#messages.danger(request, "Usename already exists!") 
-		return HttpResponse(e)
+		return redirect('/register')
 
 
 def login(request):
@@ -53,27 +51,24 @@ def login_submit(request):
 		uname = request.POST["username"]
 		pwd = request.POST["password"]
 		user = auth.authenticate(username=uname,password=pwd)
-		print('authenticates')
 		if user is None:
-			print("Invalid Cred")
-			return HttpResponse("Invalid creds")
+			#message.danger ("Invalid Cred")
+			return redirect('/login')
 		else:
-			print("else")
 			userProfile = User.objects.get(user = user)
 			auth.login(request, user)
-			print("login")
 			U = cookies.SimpleCookie()
 			U['username'] = user
-			print("Login success")
-			return redirect("/home")
+			#success message.success
+			return redirect("/")
 	else:
-		return HttpResponse("Get")
+		return redirect('/login')
 
 
 def logout(request):
 	auth_logout(request)
 	#messages.info(request, "You have successfully logged out.") 
-	return redirect("/home")
+	return redirect("/")
 
 def home(request):
 	return render(request, "main/home.html", {})
