@@ -1,11 +1,7 @@
-from django.db import models
+from django.db import models 
+from django.contrib.auth.models import User as hUser
 
 # Create your models here.
-class UserProfiles(models.Model):
-    username = models.CharField(max_length=25, unique=True, default='')
-    first_name = models.CharField(max_length=25, default='')
-    last_name = models.CharField(max_length=25, default='')
-    email = models.EmailField(max_length=100, unique=True, default='')
-    profile_picture = models.ImageField(upload_to='profile_pics', blank=True)
-    password1 = models.CharField(max_length=25)
-    password2 = models.CharField(max_length=25)
+class User(models.Model):
+    user=models.OneToOneField(hUser,on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='profile_pics/', default='profile_pics/default.jpg')

@@ -4,9 +4,10 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <form method="POST" class="form-group">
+    <form method="POST" action="../register_submit" class="form-group" enctype="multipart/form-data">
         {% csrf_token %}
-        {{register_form|crispy}}
+        {{register_form1|crispy}}
+        {{register_form2|crispy}}
         <p>Already have a HastAkshar account? <a href="/login/">Login instead</a>!</p>
         <button type="submit", class="btn btn-success">Register</button>     
     </form>
