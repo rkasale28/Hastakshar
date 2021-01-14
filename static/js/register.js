@@ -1,5 +1,24 @@
 $('#div_id_profile_picture').css("display", "none");
 
+$("#id_username").keyup(function () {
+    var username = $(this).val();
+
+    $.ajax({
+      url: '../validate_username/',
+      data: {
+        'username': username
+      },
+      dataType: 'json',
+      success: function (data) {
+        if (data.is_taken) {
+            $("#username-error-1").css("display", "block");
+        }else{
+            $("#username-error-1").css("display", "none");
+        }
+      }
+    });
+  });
+
 function sendEmail() {
     var pwd1 = $("#id_password1").val()
     var pwd2 = $("#id_password2").val()

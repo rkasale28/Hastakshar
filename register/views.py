@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User as hUser, auth
 from .models import User
 from django.db import IntegrityError
@@ -52,6 +52,12 @@ def register_submit(request):
 		messages.warning(request, 'Username already exists in our system! Try a different username or login instead!') 
 		return redirect('/register')
 
+def validate_username(request):
+    username = request.GET.get('username', None)
+    data = {
+        'is_taken': hUser.objects.filter(username=username).exists()
+    }
+    return JsonResponse(data)
 
 def login(request):
 	login = LoginForm()

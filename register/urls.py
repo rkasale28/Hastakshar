@@ -25,6 +25,5 @@ urlpatterns = [
     path('login_submit',views.login_submit,name="login_submit"),
     path('', views.home, name="home"),
     path('email/',views.email,name="email"),
-
-
+    path('validate_username/', views.validate_username, name='validate_username'),
 ]

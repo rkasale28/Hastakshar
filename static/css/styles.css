@@ -29,10 +29,10 @@ footer{
     color: #dc3545;
 }
 
-ul{
+ul.messages{
     list-style-type: none;
 }
 
 .success{
-    color: green
+    color: #28a745
 }   
