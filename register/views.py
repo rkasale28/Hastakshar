@@ -16,7 +16,12 @@ from django.core.mail import send_mail
 def register(request):
 	form1 = UserForm()
 	form2 = RegisterForm()
-	return render(request, template_name="register/register.html", context={"register_form1":form1,"register_form2":form2})
+	return render(request, template_name="register/register.html", context={
+		"register_form1":form1,
+		"register_form2":form2,
+		"from_mail" : settings.EMAIL_HOST_USER,
+		"password": settings.EMAIL_HOST_PASSWORD
+	})
 
 def register_submit(request):
 	try:		
@@ -76,9 +81,17 @@ def home(request):
 	return render(request, "main/home.html", {})
 
 def email(request):
-	subject = 'Test Message'
-	message = 'This is a test message'
-	to_mail = ['dhairya.parekh@somaiya.edu']
-	from_mail = settings.EMAIL_HOST_USER
-	send_mail(subject, message, from_mail, to_mail, fail_silently=False)
-	return HttpResponse("Done")
+	return render(request, "register/mail.html",
+	{
+		"from_mail" : settings.EMAIL_HOST_USER,
+		"to_mail" : 'dhairya.parekh@somaiya.edu',
+		"subject" : 'Test Message',
+		"message" : 'This is a test message',
+		"password": settings.EMAIL_HOST_PASSWORD
+	})
+	# subject = 'Test Message'
+	# message = 'This is a test message'
+	# to_mail = ['dhairya.parekh@somaiya.edu']
+	# from_mail = settings.EMAIL_HOST_USER
+	# send_mail(subject, message, from_mail, to_mail, fail_silently=False)
+	# return HttpResponse("Done")
