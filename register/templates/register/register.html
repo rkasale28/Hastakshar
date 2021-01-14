@@ -1,58 +1,162 @@
-{% extends "main/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css">
 
-{% block title %}Account Registration{% endblock %}
-{% load crispy_forms_tags %}
+      /* Style page content */
+      .main {
+        margin-left: 10px;
+        margin-right: 10px;
+        padding:  10px 10px 10px 10px;
+      }
 
-{% block content %}
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Account Registration</title>    
+    <script src= "https://smtpjs.com/v3/smtp.js"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+</head>
+
+<body>
+  <!-- Page content -->
+  <div class="main">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <!-- <h1 class="mt-2">HastAkshar</h1>
+        <hr class="mt-0 mb-4"> -->
+        
     <form method="POST" action="../register_submit" class="form-group" enctype="multipart/form-data">
         {% csrf_token %}
-        {{register_form1|crispy}}
+
+        <div id="div_id_first_name" class="form-group"> 
+            <label for="id_first_name" class=" requiredField">
+                First Name
+                <span class="asteriskField">*</span> 
+            </label> 
+            <div class=""> 
+                <input type="text" name="first_name" maxlength="25" class="textinput textInput form-control" required id="id_first_name"> 
+            </div> 
+        </div> 
         
-        {{register_form2|crispy}}
+        <div id="div_id_last_name" class="form-group"> 
+            <label for="id_last_name" class=" requiredField">
+                Last Name
+                <span class="asteriskField">*</span> 
+            </label> 
+            <div class=""> 
+                <input type="text" name="last_name" maxlength="25" class="textinput textInput form-control" required id="id_last_name">
+            </div> 
+        </div> 
+        
+        <div id="div_id_username" class="form-group"> 
+            <label for="id_username" class=" requiredField">
+                Username
+                <span class="asteriskField">*</span> 
+            </label> 
+            <div class=""> 
+                <input type="text" name="username" maxlength="25" class="textinput textInput form-control" required id="id_username"> 
+            </div> 
+        </div> 
+        
+        <div id="div_id_email" class="form-group"> 
+            <label for="id_email" class=" requiredField">
+                Email Address
+                <span class="asteriskField">*</span> 
+            </label> 
+            <div class=""> 
+                <input type="email" name="email" maxlength="50" class="emailinput form-control" required id="id_email"> 
+            </div> 
+        </div> 
+        
+        <div id="div_id_password1" class="form-group"> 
+            <label for="id_password1" class=" requiredField">
+                Password
+                <span class="asteriskField">*</span> 
+            </label> 
+            <div class=""> 
+                <input type="password" name="password1" maxlength="25" class="textinput textInput form-control" required id="id_password1"> 
+            </div> 
+        </div> 
+        
+        <div id="div_id_password2" class="form-group"> 
+            <label for="id_password2" class=" requiredField">
+            Confirm Password
+            <span class="asteriskField">*</span> 
+            </label> 
+            <div class=""> 
+                <input type="password" name="password2" maxlength="25" class="textinput textInput form-control" required id="id_password2"> 
+            </div> 
+        </div> 
+        
+        <div id="div_id_profile_picture" class="form-group"> 
+            <label for="id_profile_picture">
+                Profile picture
+            </label> 
+            <div class=""> 
+                <input type="file" name="profile_picture" accept="image/*" class="clearablefileinput form-control-file" id="id_profile_picture"> 
+            </div> 
+        </div>
+
 
         <input type="hidden" name="otp1">
-        <input type="password" name="otp2" id="otp2" style="display:none" placeholder="Enter OTP here">
-        <input type="button" class="btn" value="Verify Email" onclick="sendEmail()" id="otp_button"/>
-
-        <p>Already have a HastAkshar account? <a href="/login/">Login instead</a>!</p>
+        <div id="div_id_otp" class="form-group" style="display:none"> 
+            <label for="otp2" class=" requiredField">
+                Enter OTP
+                <span class="asteriskField">*</span> 
+            </label> 
+            <div class=""> 
+                <input type="password" name="otp2" minlength="5" maxlength="5" class="textinput textInput form-control" required id="otp2" > 
+            </div> 
+        </div>        
+        <input type="button" class="btn" value="Verify Email" onclick="sendEmail()" id="otp_button"/>     
         <button type="submit" class="btn btn-success" style="display:none" id="submit">Register</button>     
     </form>
+
+    <footer style="position:fixed; bottom:0; display:flex; text-align:center; border-top-color:grey; border-top-style: solid; width: 100%">
+        <p>Already have a HastAkshar account? <a href="/login/">Login instead</a>!</p>    
+    </footer>
   
   <script type="text/javascript">
-   
+    $('#div_id_profile_picture').css("display","none");    
 
     function sendEmail() { 
-        console.log("sendEmail")
         var pwd1 = $("#id_password1").val()
         var pwd2 = $("#id_password2").val()
         if (pwd1==pwd2){
             if (pwd1!="" && pwd2!=""){
+            $('#id_first_name').attr('readonly', true);   
+            $('#id_last_name').attr('readonly', true);    
+            $('#id_username').attr('readonly', true);    
+            $('#id_email').attr('readonly', true);    
+            $('#id_password1').attr('readonly', true);    
+            $('#id_password2').attr('readonly', true); 
+            
             var mail = $("#id_email").val()
 
             $("#otp2").css("display","block");
             $("#submit").css("display","block");
+            $("#div_id_otp").css("display","block");
             $("#otp_button").css("display","none");
+            $('#div_id_profile_picture').css("display","block");    
 
-            var num = 0
+
+            var num = ''
             for (i = 0; i < 5; i++) {
-                num = num*10;
                 digit = Math.floor(Math.random() * 10);
-                num = num + digit
+                num = num + digit.toString()
             }
             
             console.log(num)
             
-            var str = num.toString()
-
-            $("#otp1").val = str
-            var msg =  "Dear user,\nYour OTP for Hastakshar Account Registration is: " + str + ".\nKindly DO NOT share this One-Time-Password with anyone!\n\n--\nWarm Regards\nSupport Team at Hastakshar"
+            $("#otp1").val = num
+            var msg =  "Dear user, <br>Your OTP for Hastakshar Account Registration is: " + num + ".<br>Kindly DO NOT share this One-Time-Password with anyone!<br><br>--<br>Warm Regards,<br>Support Team at Hastakshar"
             
             Email.send({ 
                 Host: "smtp.gmail.com", 
-                Username: "{{from_mail}}", 
-                Password: "{{password}}", 
+                Username: "hastakshar.noreply@gmail.com", 
+                Password: "Password_1", 
                 To: mail, 
-                From: "{{from_mail}}", 
+                From: "hastakshar.noreply@gmail.com", 
                 Subject: "OTP for Hastakshar Account Registration", 
                 Body: msg
             }) 
@@ -71,4 +175,15 @@
         }
     }
   </script> 
-{% endblock %}
+
+
+
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+
+</body>
+</html>
