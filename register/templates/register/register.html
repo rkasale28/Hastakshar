@@ -19,6 +19,8 @@
     </form>
   
   <script type="text/javascript">
+   
+
     function sendEmail() { 
         console.log("sendEmail")
         var pwd1 = $("#id_password1").val()
@@ -43,19 +45,16 @@
             var str = num.toString()
 
             $("#otp1").val = str
-            console.log("{{from_mail}}")
-            console.log("{{password}}")
-            console.log("{{from_mail}}")
-            console.log(mail)
-
+            var msg =  "Dear user,\nYour OTP for Hastakshar Account Registration is: " + str + ".\nKindly DO NOT share this One-Time-Password with anyone!\n\n--\nWarm Regards\nSupport Team at Hastakshar"
+            
             Email.send({ 
                 Host: "smtp.gmail.com", 
                 Username: "{{from_mail}}", 
                 Password: "{{password}}", 
                 To: mail, 
                 From: "{{from_mail}}", 
-                Subject: "OTP", 
-                Body: "This is otp :" + str 
+                Subject: "OTP for Hastakshar Account Registration", 
+                Body: msg
             }) 
             .then(function (message) { 
             alert("OTP sent successfully") 
