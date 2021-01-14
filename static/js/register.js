@@ -28,9 +28,7 @@ function sendEmail() {
                 num = num + digit.toString()
             }
 
-            console.log(num)
-
-            $("#otp1").val = num
+            $("#otp1").val(num)
             var msg = "Dear " + user + ",<br>Your OTP for Hastakshar Account Registration is: " + num + ".<br>Kindly DO NOT share this One-Time-Password with anyone!<br><br>--<br>Warm Regards,<br>Support Team at Hastakshar"
 
             Email.send({

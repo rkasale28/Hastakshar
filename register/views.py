@@ -32,19 +32,21 @@ def register_submit(request):
 			uname = request.POST["username"]
 			pwd1 = request.POST["password1"]
 			pwd2 = request.POST["password2"]
+			otp1 = request.POST["otp1"]
+			otp2 = request.POST["otp2"]
 			images = request.FILES['profile_picture'] if 'profile_picture' in request.FILES else 'profile_pics/default.jpg'
-			
-			if pwd1 == pwd2:
+						
+			if otp1 == otp2:
 				user = hUser.objects.create_user(first_name=fname,last_name=lname,email=email,username=uname,password=pwd1)
 				profile = User(user = user, profile_picture = images)
 				profile.save()
-				# If registration done directly redirect to home with login
+
 				user = auth.authenticate(username=uname,password=pwd1)
 				auth.login(request, user)				
 				return redirect('/')			
 			else:
-				messages.warning(request, 'Passwords don\'t match!')
-				return redirect('/register') #"Password don't match" message.danger
+				messages.warning(request, 'Incorrect OTP!')
+				return redirect('/register')
 	
 	except IntegrityError as e:
 		messages.warning(request, 'Username already exists in our system! Try a different username or login instead!') 
