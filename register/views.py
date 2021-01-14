@@ -9,6 +9,8 @@ from .models import User
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from http import cookies
+from django.conf import settings
+from django.core.mail import send_mail
 
 # Create your views here.
 def register(request):
@@ -72,3 +74,11 @@ def logout(request):
 
 def home(request):
 	return render(request, "main/home.html", {})
+
+def email(request):
+	subject = 'Test Message'
+	message = 'This is a test message'
+	to_mail = ['dhairya.parekh@somaiya.edu']
+	from_mail = settings.EMAIL_HOST_USER
+	send_mail(subject, message, from_mail, to_mail, fail_silently=False)
+	return HttpResponse("Done")
