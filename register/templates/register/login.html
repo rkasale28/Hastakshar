@@ -1,23 +1,18 @@
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <style type="text/css">
+  <title>Account Login</title>
 
-        /* Style page content */
-        .main {
-          margin-left: 10px;
-          margin-right: 10px;
-          padding:  10px 10px 10px 10px;
-        }
-  
-      </style>
+  <script src="https://smtpjs.com/v3/smtp.js"> </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>Account Login</title>
-    
-    <script src= "https://smtpjs.com/v3/smtp.js"> </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="{%static 'css/styles.css'%}" />
+
 </head>
 
 <body>
@@ -27,46 +22,42 @@
       <div class="col-8">
         <!-- <h1 class="mt-2">HastAkshar</h1>
         <hr class="mt-0 mb-4"> -->
-        
-    <h1>Welcome back!</h1>
-    <form method="POST" class="form-group" action="../login_submit">
-        {% csrf_token %}
 
-        <div id="div_id_username" class="form-group"> 
+        <h1>Welcome back!</h1>
+        <form method="POST" class="form-group" action="../login_submit">
+          {% csrf_token %}
+
+          <div id="div_id_username" class="form-group">
             <label for="id_username" class=" requiredField">
-                Username
-                <span class="asteriskField">*</span> 
-            </label> 
-            <div class=""> 
-                <input type="text" name="username" maxlength="25" class="textinput textInput form-control" required id="id_username"> 
-            </div> 
-        </div> 
+              Username
+              <span class="asteriskField">*</span>
+            </label>
+            <div class="">
+              <input type="text" name="username" maxlength="25" class="textinput textInput form-control" required
+                id="id_username">
+            </div>
+          </div>
 
-        <div id="div_id_password" class="form-group"> 
+          <div id="div_id_password" class="form-group">
             <label for="id_password" class=" requiredField">
-                Password
-                <span class="asteriskField">*</span> 
-            </label> 
-            <div class=""> 
-                <input type="password" name="password" maxlength="25" class="textinput textInput form-control" required id="id_password"> 
-            </div> 
-        </div>
+              Password
+              <span class="asteriskField">*</span>
+            </label>
+            <div class="">
+              <input type="password" name="password" maxlength="25" class="textinput textInput form-control" required
+                id="id_password">
+            </div>
+          </div>
 
-        <button type="submit", class="btn btn-success" color=>Login</button>        
-    </form>
+          <button type="submit" , class="btn btn-success" color=>Login</button>
+        </form>
 
-    <footer style="position:fixed; bottom:0; display:flex; text-align:center; border-top-color:grey; border-top-style: solid; width: 100%">
-        <p>Don't have a HastAkshar account? Create one for free <a href="/register/">here</a>!</p> 
-    </footer>
-  
-
-
+        <footer>
+          <p>Don't have a HastAkshar account? Create one for free <a href="/register/">here</a>!</p>
+        </footer>
       </div>
     </div>
   </div>
-
-  </div>
-
-
 </body>
+
 </html>

@@ -1,0 +1,27 @@
+.main {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px 10px 10px 10px;
+}
+
+#div_id_otp, #submit{
+    display: none;
+}
+
+body{
+    margin-bottom: 20px;
+}
+
+footer{
+    position: fixed; 
+    bottom:0; 
+    display:flex; 
+    text-align:center; 
+    align-items: center;
+    border-top-color:grey; 
+    border-top-style: solid; 
+    width: 100%;
+    padding-left: 6px;
+    background-color: whitesmoke;
+}
+          
