@@ -33,19 +33,21 @@ def register_submit(request):
 			pwd1 = request.POST["password1"]
 			pwd2 = request.POST["password2"]
 			images = request.FILES['profile_picture'] if 'profile_picture' in request.FILES else 'profile_pics/default.jpg'
+			
 			if pwd1 == pwd2:
 				user = hUser.objects.create_user(first_name=fname,last_name=lname,email=email,username=uname,password=pwd1)
 				profile = User(user = user, profile_picture = images)
 				profile.save()
 				# If registration done directly redirect to home with login
-				# user = auth.authenticate(username=uname,password=pwd1)
-				# auth.login(request,user)				
-				return redirect('/login')			
+				user = auth.authenticate(username=uname,password=pwd1)
+				auth.login(request, user)				
+				return redirect('/')			
 			else:
+				messages.warning(request, 'Passwords don\'t match!')
 				return redirect('/register') #"Password don't match" message.danger
 	
 	except IntegrityError as e:
-		#messages.danger(request, "Usename already exists!") 
+		messages.warning(request, 'Username already exists in our system! Try a different username or login instead!') 
 		return redirect('/register')
 
 
@@ -59,14 +61,14 @@ def login_submit(request):
 		pwd = request.POST["password"]
 		user = auth.authenticate(username=uname,password=pwd)
 		if user is None:
-			#message.danger ("Invalid Cred")
+			messages.warning(request, 'Invalid credentials!')
 			return redirect('/login')
 		else:
 			userProfile = User.objects.get(user = user)
 			auth.login(request, user)
 			U = cookies.SimpleCookie()
 			U['username'] = user
-			#success message.success
+			# messages.success(request, 'You have successfully signed-in!')
 			return redirect("/")
 	else:
 		return redirect('/login')
@@ -74,7 +76,7 @@ def login_submit(request):
 
 def logout(request):
 	auth_logout(request)
-	#messages.info(request, "You have successfully logged out.") 
+	#messages.success(request, 'You have successfully logged out!')
 	return redirect("/")
 
 def home(request):

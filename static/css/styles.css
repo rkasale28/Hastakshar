@@ -24,4 +24,15 @@ footer{
     padding-left: 6px;
     background-color: whitesmoke;
 }
-          
+
+.warning{
+    color: #dc3545;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.success{
+    color: green
+}   

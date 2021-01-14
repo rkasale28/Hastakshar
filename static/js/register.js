@@ -31,7 +31,7 @@ function sendEmail() {
             console.log(num)
 
             $("#otp1").val = num
-            var msg = "Dear " + user + ", <br>Your OTP for Hastakshar Account Registration is: " + num + ".<br>Kindly DO NOT share this One-Time-Password with anyone!<br><br>--<br>Warm Regards,<br>Support Team at Hastakshar"
+            var msg = "Dear " + user + ",<br>Your OTP for Hastakshar Account Registration is: " + num + ".<br>Kindly DO NOT share this One-Time-Password with anyone!<br><br>--<br>Warm Regards,<br>Support Team at Hastakshar"
 
             Email.send({
                 Host: "smtp.gmail.com",
@@ -43,16 +43,16 @@ function sendEmail() {
                 Body: msg
             })
                 .then(function (message) {
-                    alert("OTP sent successfully")
+                    alert("OTP sent successfully!")
                 });
         } else {
             $("#id_password1").val("")
             $("#id_password2").val("")
-            alert("Passwords can't be blank")
+            alert("Password fields cannot be empty!")
         }
     } else {
         $("#id_password1").val("")
         $("#id_password2").val("")
-        alert("Passwords don't match")
+        alert("Password and Confirm Password fields don't match!")
     }
 }
