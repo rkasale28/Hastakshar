@@ -86,7 +86,6 @@ $("#otp2").keyup(function () {
 
     display("#otp-error-1",otp2 == "")
     display("#otp-error-2",(otp2 != "" && otp1!=otp2))
-    enable("#submit", (otp2 == "" || otp1!=otp2))
 });
 
 function display(id, boolean) {

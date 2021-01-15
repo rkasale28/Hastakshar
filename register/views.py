@@ -67,6 +67,20 @@ def login_submit(request):
 	else:
 		return redirect('/login')
 
+def forgot_password(request):
+	return render(request,'register/forgot.html')
+
+def forgot_submit(request):
+	if (request.method=='POST'):
+		username = request.POST["username"]
+		pwd = request.POST["password1"]
+
+		user = hUser.objects.get(username=username)
+		user.set_password(pwd)
+		user.save()
+		return redirect('/login')
+	else:
+		return redirect('/login')
 
 def logout(request):
 	auth_logout(request)

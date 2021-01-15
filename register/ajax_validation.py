@@ -43,3 +43,22 @@ def validate_password(request):
     }
 	
 	return JsonResponse(data)
+
+def validate_username_exists(request):
+	username = request.GET.get('username', None)
+	
+	data = {
+        'exists': not User.objects.filter(username=username).exists()		
+    }
+	
+	return JsonResponse(data)
+
+def get_email(request):
+	username = request.GET.get('username', None)
+	user = User.objects.get(username=username)
+	
+	data = {
+        'email': user.email		
+    }
+	
+	return JsonResponse(data)

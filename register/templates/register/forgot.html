@@ -1,0 +1,122 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Forgot Password</title>
+
+    <script src="https://smtpjs.com/v3/smtp.js"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{%static 'css/styles.css'%}" />
+</head>
+
+<body>
+    <!-- Page content -->
+    <div class="main">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <form method="POST" action="../forgot_submit" class="form-group" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div id="div_id_username" class="form-group">
+                        <label for="id_username" class=" requiredField">
+                            Username
+                            <span class="asteriskField">*</span>
+                        </label>
+                        <div class="">
+                            <input type="text" name="username" maxlength="25" class="textinput textInput form-control"
+                                required id="id_username">
+                        </div>
+
+                        <div>
+                            <ul class="text-danger messages">
+                                <li id="username-error-1" style="display: none;">Username does not exist</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <input type="button" class="btn btn-info" value="Send OTP" onclick="sendEmail()" id="otp_button"
+                        disabled />
+
+                    <input type="hidden" name="otp1" id="otp1">
+
+                    <div id="div_id_otp" class="form-group" style="display:none">
+                        <label for="otp2" class=" requiredField">
+                            Enter OTP
+                            <span class="asteriskField">*</span>
+                        </label>
+                        <div class="">
+                            <input type="password" name="otp2" minlength="5" maxlength="5"
+                                class="textinput textInput form-control" required id="otp2">
+                        </div>
+                        <div>
+                            <ul class="text-danger messages">
+                                <li id="otp-error-1" style="display: none;">OTP cannot be blank</li>
+                                <li id="otp-error-2" style="display: none;">OTP doesn't match</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <input type="button" class="btn btn-info" value="Submit" onclick="enterPassword()" id="submit_button"
+                        disabled style="display: none;"/>
+
+                    <div id="div_id_password1" class="form-group" style="display: none;">
+                        <label for="id_password1" class=" requiredField">
+                            Password
+                            <span class="asteriskField">*</span>
+                        </label>
+                        <div class="">
+                            <input type="password" name="password1" maxlength="25"
+                                class="textinput textInput form-control" required id="id_password1">
+                        </div>
+                        
+                        <div>
+                            <ul class="text-danger messages">
+                                <li id="password-error-1" >Password cannot be blank</li>
+                            </ul>
+                            <ul class="text-primary messages">
+                                <li id="password-error-2">Password should contain atleast one upper Case alphabet</li>
+                                <li id="password-error-3">Password should contain atleast one lower Case alphabet</li>
+                                <li id="password-error-4">Password should contain atleast one digit</li>
+                                <li id="password-error-5">Password should contain atleast one special character</li>
+                                <li id="password-error-6">Password should contain atleast six characters</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="div_id_password2" class="form-group" style="display: none;">
+                        <label for="id_password2" class=" requiredField">
+                            Confirm Password
+                            <span class="asteriskField">*</span>
+                        </label>
+                        <div class="">
+                            <input type="password" name="password2" maxlength="25"
+                                class="textinput textInput form-control" required id="id_password2">
+                        </div>
+                        <div>
+                            <ul class="text-danger messages">
+                                <li id="password2-error-1" >Confirm Password cannot be blank</li>
+                                <li id="password2-error-2" style="display: none;">Passwords don't match</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success" id="submit" disabled style="display:none">Change Password</button>
+                </form>
+
+                <footer>
+                    <p>Know your password? <a href="/login/">Login instead</a>!</p>
+                </footer>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="{%static 'js/forgot.js'%}"></script>
+    <script type="text/javascript" src="{%static 'js/ajax-validation_forgot.js'%}"></script>
+</body>
+
+</html>

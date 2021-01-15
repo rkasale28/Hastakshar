@@ -4,10 +4,6 @@
     padding: 10px 10px 10px 10px;
 }
 
-#div_id_otp, #submit{
-    display: none;
-}
-
 body{
     margin-bottom: 20px;
 }
