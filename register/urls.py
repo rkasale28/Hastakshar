@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from . import ajax_validation as ajax
 
 urlpatterns = [
     path('register/', views.register, name = "register"),
@@ -25,5 +26,8 @@ urlpatterns = [
     path('login_submit',views.login_submit,name="login_submit"),
     path('', views.home, name="home"),
     path('email/',views.email,name="email"),
-    path('validate_username/', views.validate_username, name='validate_username'),
+
+    path('ajax/validate_email/', ajax.validate_email, name='validate_email'),
+    path('ajax/validate_username/', ajax.validate_username, name='validate_username'),
+    path('ajax/validate_password/', ajax.validate_password, name='validate_password'),
 ]

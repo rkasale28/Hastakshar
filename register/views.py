@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.contrib.auth.models import User as hUser, auth
 from .models import User
 from django.db import IntegrityError
@@ -11,6 +11,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from http import cookies
 from django.conf import settings
 from django.core.mail import send_mail
+import re
 
 # Create your views here.
 def register(request):
@@ -51,13 +52,6 @@ def register_submit(request):
 	except IntegrityError as e:
 		messages.warning(request, 'Username already exists in our system! Try a different username or login instead!') 
 		return redirect('/register')
-
-def validate_username(request):
-    username = request.GET.get('username', None)
-    data = {
-        'is_taken': hUser.objects.filter(username=username).exists()
-    }
-    return JsonResponse(data)
 
 def login(request):
 	login = LoginForm()
