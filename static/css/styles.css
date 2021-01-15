@@ -36,3 +36,8 @@ ul.messages{
 .success{
     color: #28a745
 }   
+
+.asteriskField{
+    color: #dc3545;
+    font-weight: bold;
+}

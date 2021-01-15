@@ -53,6 +53,7 @@ $("#id_password1").keyup(function () {
         },
         dataType: 'json',
         success: function (data) {
+            display("#password-error-1",password == "")
             display("#password-error-2", data.upper_case_alphabet)
             display("#password-error-3", data.lower_case_alphabet)
             display("#password-error-4", data.digit)
@@ -64,16 +65,29 @@ $("#id_password1").keyup(function () {
     match()
 });
 
-$("#id_password2").keyup(match)
+$("#id_password2").keyup(function () {
+    var password = $(this).val().trim();
+
+    display("#password2-error-1",password == "")
+
+    match()
+});
 
 function match(){
     var password1 = $("#id_password1").val().trim();
     var password2 = $("#id_password2").val().trim();
 
-    display("#password-error-1",password1 == "")
-    display("#password2-error-1",password2 == "")
     display("#password2-error-2",(!(password1 == "" || password2=="") && password1!=password2))
 }
+
+$("#otp2").keyup(function () {
+    var otp1 = $("#otp1").val().trim()
+    var otp2 = $(this).val().trim();
+
+    display("#otp-error-1",otp2 == "")
+    display("#otp-error-2",(otp2 != "" && otp1!=otp2))
+    enable("#submit", (otp2 == "" || otp1!=otp2))
+});
 
 function display(id, boolean) {
     if (boolean) {
@@ -81,4 +95,8 @@ function display(id, boolean) {
     } else {
         $(id).css("display", "none");
     }
+}
+
+function enable(id, boolean){
+    $(id).prop('disabled',boolean)
 }

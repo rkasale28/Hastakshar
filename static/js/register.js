@@ -42,7 +42,6 @@ function sendEmail() {
     var mail = $("#id_email").val().trim()
     var user = $("#id_username").val().trim()
     
-    $("#otp1").val(num)
     var msg = "Dear " + user + ",<br>Your OTP for Hastakshar Account Registration is: " + num + ".<br>Kindly DO NOT share this One-Time-Password with anyone!<br><br>--<br>Warm Regards,<br>Support Team at Hastakshar"
 
     Email.send({
@@ -60,4 +59,6 @@ function sendEmail() {
     }else{
         alert("Invalid Format. Please enter information according to given conventions")
     }
+
+    $("#otp1").val(num)
 } 
