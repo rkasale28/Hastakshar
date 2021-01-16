@@ -28,6 +28,7 @@ urlpatterns = [
     path('email/',views.email,name="email"),
     path('forgot_password/',views.forgot_password,name="forgot_password"),
     path('forgot_submit',views.forgot_submit,name="forgot_submit"),
+    path('view_profile/',views.view_profile,name="view_profile"),
 
     path('ajax/validate_email/', ajax.validate_email, name='validate_email'),
     path('ajax/validate_username/', ajax.validate_username, name='validate_username'),

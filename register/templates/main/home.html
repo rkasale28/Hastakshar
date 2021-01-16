@@ -16,15 +16,11 @@
 
 <body>
     <!-- Page content -->
-    <div class="main">
-        <div class="row justify-content-center">
-            <div class="col-8">
-                <!-- <h1 class="mt-2">HastAkshar</h1>
-        <hr class="mt-0 mb-4"> -->
+
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <img class="d-block w-80 mx-auto" src="media\hastakshar-logo.jpg" width="50"
                         style="padding: 5px; border-radius: 50%">
-                    <a class="navbar-brand" href="#">&nbsp;Home Page</a>
+                    <a class="navbar-brand" href="#">&nbsp;Home</a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
                         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +33,8 @@
                             <img class="d-block w-80 mx-auto" src="{{user.user.profile_picture.url}}" width="50"
                                 style="padding: 5px; border-radius: 50%">
                             <div style="display: inline">
-                                <p><a class="nav-link" href="#">नमस्ते, <b><i>{{user.username}}</i></a></b></p>
+                                <p><a class="nav-link" href="view_profile/">नमस्ते, <b><i>{{user.username}}</i></a></b>
+                                </p>
                             </div>
 
                             <li class="nav-item">
@@ -49,10 +46,13 @@
                         </ul>
                     </div>
                 </nav>
+                <div class="main">
+                    <div class="row justify-content-center">
+                        <div class="col-8">
 
-                <body>
+               
                     <p>Hey what's up</p>
-                </body>
+                
 
                 {% else %}
                 <li class="nav-item">
@@ -72,6 +72,9 @@
     </div>
 
     </div>
+    <footer>
+        <p>Made with ♥ by <i>Team Hastakshar</i></p>
+    </footer>
 
 
 </body>

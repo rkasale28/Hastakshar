@@ -105,3 +105,6 @@ def email(request):
 	# from_mail = settings.EMAIL_HOST_USER
 	# send_mail(subject, message, from_mail, to_mail, fail_silently=False)
 	# return HttpResponse("Done")
+
+def view_profile(request):
+	return render(request,'register/view_profile.html')

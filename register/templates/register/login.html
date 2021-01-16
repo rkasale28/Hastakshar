@@ -17,21 +17,22 @@
 
 <body>
   <!-- Page content -->
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img class="d-block w-80 mx-auto" src="..\media\hastakshar-logo.jpg" width="50"
+      style="padding: 5px; border-radius: 50%">
+    <a class="navbar-brand" href="#">&nbsp;Login Page</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <!-- Enter another tab piece information here -->
+    </div>
+  </nav>
   <div class="main">
     <div class="row justify-content-center">
       <div class="col-8">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <img class="d-block w-80 mx-auto" src="..\media\hastakshar-logo.jpg" width="50"
-            style="padding: 5px; border-radius: 50%">
-          <a class="navbar-brand" href="#">&nbsp;Login Page</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <!-- Enter another tab piece information here -->
-          </div>
-        </nav>
 
         {% if messages %}
         <ul class="messages">
@@ -74,13 +75,15 @@
           <a href="/forgot_password">Forgot Password</a>
         </div>
 
-        <footer>
-          <p>New to Hasakshar WVCS? Don't have a HastAkshar account? Create one for free <a href="/register/">here</a>!
-          </p>
-        </footer>
+
       </div>
+
     </div>
+
   </div>
+  <footer>
+    <p>New to Hasakshar WVCS? Don't have a HastAkshar account? Create one for free <a href="/register/">here</a>!</p>
+  </footer>
 </body>
 
 </html>
