@@ -34,18 +34,18 @@ function sendEmail() {
 
             mail = data.email;
 
-            var msg = "Dear " + username + ",<br>You have applied for changing password. <br> Your OTP for Hastakshar Account Password Reset is: " + num + ".<br>Kindly DO NOT share this One-Time-Password with anyone!<br><br>--<br>Warm Regards,<br>Support Team at Hastakshar"
+            var msg = "Dear " + username + ",<br>You have requested for changing your password. <br>Your OTP for Hastakshar Account Password Reset is: " + num + ".<br>Kindly DO NOT share this One-Time-Password with anyone!<br><br>--<br>Warm Regards,<br>Support Team at Hastakshar"
             Email.send({
                 Host: "smtp.gmail.com",
                 Username: "hastakshar.noreply@gmail.com",
                 Password: "Password_1",
                 To: mail,
                 From: "hastakshar.noreply@gmail.com",
-                Subject: "OTP for Hastakshar Account Registration",
+                Subject: "OTP for Hastakshar Account Password Reset",
                 Body: msg
             })
                 .then(function (message) {
-                    alert("OTP sent successfully to registered mail!")
+                    alert("OTP sent successfully to registered email address!")
 
                     $("#otp1").val(num)
                     $('#otp_button').css("display", "none");

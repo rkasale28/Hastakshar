@@ -20,16 +20,28 @@
   <div class="main">
     <div class="row justify-content-center">
       <div class="col-8">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <img class="d-block w-80 mx-auto" src="..\media\hastakshar-logo.jpg" width="50"
+            style="padding: 5px; border-radius: 50%">
+          <a class="navbar-brand" href="#">&nbsp;Login Page</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <!-- Enter another tab piece information here -->
+          </div>
+        </nav>
 
         {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
+        <ul class="messages">
+          {% for message in messages %}
+          <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul>
         {% endif %}
 
-        <h1>Welcome back!</h1>
+        <h3>Welcome back, kindly Login in to video call your buddy!</h3>
         <form method="POST" class="form-group" action="../login_submit">
           {% csrf_token %}
 
@@ -63,7 +75,8 @@
         </div>
 
         <footer>
-          <p>Don't have a HastAkshar account? Create one for free <a href="/register/">here</a>!</p>
+          <p>New to Hasakshar WVCS? Don't have a HastAkshar account? Create one for free <a href="/register/">here</a>!
+          </p>
         </footer>
       </div>
     </div>
