@@ -12,6 +12,7 @@ from http import cookies
 from django.conf import settings
 from django.core.mail import send_mail
 import re
+# from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def register(request):
@@ -106,5 +107,6 @@ def email(request):
 	# send_mail(subject, message, from_mail, to_mail, fail_silently=False)
 	# return HttpResponse("Done")
 
-def view_profile(request):
+# @login_required
+def view_profile(request):	
 	return render(request,'register/view_profile.html')

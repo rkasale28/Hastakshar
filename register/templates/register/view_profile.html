@@ -17,8 +17,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <img class="d-block w-80 mx-auto" src="..\media\hastakshar-logo.jpg" width="50"
             style="padding: 5px; border-radius: 50%">
-        <a class="navbar-brand" href="/">&nbsp;Home</a>    
-        <a class="navbar-brand" href="#">&nbsp;View Profile</a>
+        <a class="navbar-brand" href="/">&nbsp;Home</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,9 +25,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav w-100 mr-auto">
-                <img class="d-block w-80 mx-auto" src="/media/profile_pics/default.jpg" width="50" style="padding: 5px; border-radius: 50%">
+                <img class="d-block w-80 mx-auto" src="{{user.user.profile_picture.url}}" width="50"
+                    style="padding: 5px; border-radius: 50%">
                 <div style="display: inline">
-                    <p><a class="nav-link" href="view_profile/">नमस्ते, <b><i>dhairyap99</i></a></b></p>
+                    <p><a class="nav-link" href="view_profile/">नमस्ते, <b><i>{{user.username}}</i></a></b>
+                    </p>
                 </div>
 
                 <li class="nav-item">
@@ -42,8 +43,15 @@
     </nav>
     <div class="main">
         <div class="row justify-content-center">
-            <div class="col-8">
-                <p>Hey what's up</p>
+            <div class="container">
+                <h3>Review your profile, <i>{{user.username}}</i></h3>
+                <br><br>
+                <p><b>First Name:</b> {{ user.first_name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <b>Last Name:</b> {{ user.last_name }}
+                </p>
+                <p><b>Registered Email Address:</b> {{ user.email }}</p>
+                <p><b>Profile Picture</b></p>
+                <img src="{{user.user.profile_picture.url}}" width="240">
             </div>
         </div>
 
