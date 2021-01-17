@@ -85,8 +85,6 @@ $("#id_password1").keyup(function () {
         },
         dataType: 'json',
         success: function (data) {
-            console.log(password)
-            console.log(data.exists)
             display("#password-error-1", password == "")
             display("#password-error-2", data.exists)
             display("#password-error-3", data.upper_case_alphabet)
@@ -107,18 +105,6 @@ $("#id_password2").keyup(function () {
 
     match()
 });
-
-function display(id, boolean) {
-    if (boolean) {
-        $(id).css("display", "block");
-    } else {
-        $(id).css("display", "none");
-    }
-}
-
-function enable(id, boolean){
-    $(id).prop('disabled',boolean)
-}
 
 function match(){
     var password1 = $("#id_password1").val().trim();

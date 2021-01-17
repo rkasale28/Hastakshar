@@ -32,8 +32,6 @@ def validate_password(request):
 	username = request.GET.get('username')
 
 	user = auth.authenticate(username=username,password=password)
-	print(password)
-	print(user)
 	
 	upper_case_alphabet_pattern = ".*[A-Z]+.*"
 	lower_case_alphabet_pattern = ".*[a-z]+.*"

@@ -88,15 +88,3 @@ $("#otp2").keyup(function () {
     display("#otp-error-2",(otp2 != "" && otp1!=otp2))
     enable("#submit", (otp2 == "" || otp1!=otp2))
 });
-
-function display(id, boolean) {
-    if (boolean) {
-        $(id).css("display", "block");
-    } else {
-        $(id).css("display", "none");
-    }
-}
-
-function enable(id, boolean){
-    $(id).prop('disabled',boolean)
-}
