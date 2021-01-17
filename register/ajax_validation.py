@@ -1,5 +1,5 @@
 import re
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, auth
 from django.http import JsonResponse
 from validate_email import validate_email as valid_email
 
@@ -29,12 +29,18 @@ def validate_username(request):
 
 def validate_password(request):
 	password = request.GET.get('password', None)
+	username = request.GET.get('username')
+
+	user = auth.authenticate(username=username,password=password)
+	print(password)
+	print(user)
 	
 	upper_case_alphabet_pattern = ".*[A-Z]+.*"
 	lower_case_alphabet_pattern = ".*[a-z]+.*"
 	digit_pattern = ".*[0-9]+.*"
 	
 	data = {
+		'exists' : user is not None,
 		'upper_case_alphabet' : not bool(re.match(upper_case_alphabet_pattern,password)),
 		'lower_case_alphabet' : not bool(re.match(lower_case_alphabet_pattern,password)),
 		'digit' : not bool(re.match(digit_pattern, password)),

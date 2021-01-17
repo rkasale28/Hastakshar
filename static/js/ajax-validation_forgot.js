@@ -75,20 +75,25 @@ $("#otp2").keyup(function () {
 
 $("#id_password1").keyup(function () {
     var password = $(this).val().trim();
+    var username = $('#id_username').val().trim();
 
     $.ajax({
         url: '../ajax/validate_password/',
         data: {
-            'password': password
+            'password': password,
+            'username': username
         },
         dataType: 'json',
         success: function (data) {
-            display("#password-error-1",password == "")
-            display("#password-error-2", data.upper_case_alphabet)
-            display("#password-error-3", data.lower_case_alphabet)
-            display("#password-error-4", data.digit)
-            display("#password-error-5", data.special_character)
-            display("#password-error-6", data.length)
+            console.log(password)
+            console.log(data.exists)
+            display("#password-error-1", password == "")
+            display("#password-error-2", data.exists)
+            display("#password-error-3", data.upper_case_alphabet)
+            display("#password-error-4", data.lower_case_alphabet)
+            display("#password-error-5", data.digit)
+            display("#password-error-6", data.special_character)
+            display("#password-error-7", data.length)
         }
     });
 
@@ -119,6 +124,11 @@ function match(){
     var password1 = $("#id_password1").val().trim();
     var password2 = $("#id_password2").val().trim();
 
+    var bool = password1 == "" || 
+    password2=="" || 
+    password1!=password2 ||
+    $('#password-error-2').css('display') == 'block'
+
     display("#password2-error-2",(!(password1 == "" || password2=="") && password1!=password2))
-    enable("#submit",(password1 == "" || password2=="" || password1!=password2))
+    enable("#submit",bool)
 }
