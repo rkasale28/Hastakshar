@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +29,7 @@
                 <img class="d-block w-80 mx-auto" src="{{user.user.profile_picture.url}}" width="50"
                     style="padding: 5px; border-radius: 50%">
                 <div style="display: inline">
-                    <p><a class="nav-link" href="view_profile/">नमस्ते, <b><i>{{user.username}}</i></a></b>
+                    <p><a class="nav-link" href="../view_profile/">नमस्ते, <b><i>{{user.username}}</i></a></b>
                     </p>
                 </div>
 
