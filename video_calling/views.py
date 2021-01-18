@@ -41,7 +41,6 @@ def user_preferences(request):
     if thread is None:
         thread = sio.start_background_task(background_thread)
     return render(request, "user_preferences.html", {})
-<<<<<<< HEAD
 
 @sio.event
 def generate(sid):
@@ -54,8 +53,6 @@ def generate(sid):
     url = '{}?{}'.format(base_url,query_string)
                 
     sio.emit('redirect',{'url':url}, to=sid)
-=======
->>>>>>> c56d83e560175a6b9bc5901d68fba4c43d3f1cd6
 
 @sio.event
 def my_event(sid, message):
