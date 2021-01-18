@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Preferences</title>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.min.js"></script>
+
+    <link rel="stylesheet" href="/css/user_preferences.css">
+</head>
+<body>
+    <h2>Video</h2>
+    <div id="myVideo" class="content">
+        <div class="overlay">
+            <img src="/images/sender.png">
+            <h2>Me</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <button id="audio">
+            Audio
+        </button>
+
+        <button id="video">
+            Video
+        </button>
+
+        <button id="join">
+            Join Room
+        </button>
+    </div>
+
+    <script type="text/javascript" src="/js/user_preferences.js"></script>
+</body>
+</html>

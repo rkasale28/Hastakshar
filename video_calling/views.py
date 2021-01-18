@@ -17,7 +17,7 @@ def index(request):
     global thread
     if thread is None:
         thread = sio.start_background_task(background_thread)
-    return HttpResponse(open(os.path.join(basedir, 'static/index.html')))
+    return HttpResponse(open(os.path.join(basedir, 'templates/index.html')))
 
 
 def background_thread():
@@ -29,6 +29,12 @@ def background_thread():
         sio.emit('my_response', {'data': 'Server generated event'},
                  namespace='/test')
 
+
+def user_preferences(request):
+    global thread
+    if thread is None:
+        thread = sio.start_background_task(background_thread)
+    return HttpResponse(open(os.path.join(basedir, 'templates/user_preferences.html')))
 
 @sio.event
 def my_event(sid, message):

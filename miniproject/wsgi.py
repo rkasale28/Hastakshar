@@ -15,7 +15,10 @@ import socketio
 from video_calling.views import sio
 
 static_files = {
-        '/static': './static'
+        '/static': './static',
+        '/js': './video_calling/static/js',
+        '/css':'./video_calling/static/css',
+        '/images':'./video_calling/static/images'
     }
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'miniproject.settings')
