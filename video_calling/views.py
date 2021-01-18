@@ -6,6 +6,8 @@ async_mode = None
 import os
 
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
+
 import socketio
 
 basedir = os.path.dirname(os.path.realpath(__file__))
@@ -34,7 +36,7 @@ def user_preferences(request):
     global thread
     if thread is None:
         thread = sio.start_background_task(background_thread)
-    return HttpResponse(open(os.path.join(basedir, 'templates/user_preferences.html')))
+    return render(request, "user_preferences.html", {})
 
 @sio.event
 def my_event(sid, message):
