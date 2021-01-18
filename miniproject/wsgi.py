@@ -14,7 +14,11 @@ import socketio
 
 from video_calling.views import sio
 
+static_files = {
+        '/static': './static'
+    }
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'miniproject.settings')
 
 django_app = get_wsgi_application()
-application = socketio.WSGIApp(sio, django_app)
+application = socketio.WSGIApp(sio, django_app, static_files = static_files)
