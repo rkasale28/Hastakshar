@@ -31,12 +31,10 @@ $(document).ready(function(){
     })
 
     socket.on('connect', function() {
-        //socket.emit('my_event', {data: 'I\'m connected!'});
         console.log('I\'m connected!');
     });
 
     socket.on('disconnect', function() {
-        //$('#log').append('<br>Disconnected');
         console.log('Disconnected');
     });
 

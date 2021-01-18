@@ -6,6 +6,12 @@ async_mode = None
 import os
 
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
+
+from uuid import uuid4
+from urllib.parse import urlencode
+from rapidjson import dumps, UM_HEX
+
 import socketio
 
 basedir = os.path.dirname(os.path.realpath(__file__))
@@ -34,7 +40,19 @@ def user_preferences(request):
     global thread
     if thread is None:
         thread = sio.start_background_task(background_thread)
-    return HttpResponse(open(os.path.join(basedir, 'templates/user_preferences.html')))
+    return render(request, "user_preferences.html", {})
+
+@sio.event
+def generate(sid):
+    val = uuid4()
+    val = dumps(val, uuid_mode=UM_HEX)
+    val = val.replace('"', '')
+
+    base_url = '/call'
+    query_string =  urlencode({'roomId': val})
+    url = '{}?{}'.format(base_url,query_string)
+                
+    sio.emit('redirect',{'url':url}, to=sid)
 
 @sio.event
 def my_event(sid, message):
