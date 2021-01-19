@@ -19,6 +19,7 @@ basedir = os.path.dirname(os.path.realpath(__file__))
 sio = socketio.Server(async_mode=async_mode)
 thread = None
 
+numClients = {}
 
 def index(request):
     global thread
@@ -66,6 +67,89 @@ def generate(sid,message):
     url = '{}?{}'.format(base_url,query_string)
                 
     sio.emit('redirect',{'url':url}, to=sid)
+
+@sio.event
+def get_clients(sid, data):
+    roomId = data['roomId']
+    decision = True
+
+    if (roomId in numClients.keys()):
+        length = len(numClients[roomId])
+        if (length >= 2):
+            decision = False
+
+    data['decision'] = decision
+    
+    sio.emit('grant_entry', data=data, to=sid)
+
+@sio.event
+def join_room(sid,message):
+    roomId = message['roomId']
+    userId = message['userId']
+                
+    sio.enter_room(sid,roomId)
+
+    if (roomId not in numClients.keys()):
+        numClients[roomId] = [userId]
+    else:
+        numClients[roomId].append(userId)
+
+    sio.emit('user-connected', data={'userId':userId},room=roomId)
+
+    @sio.event
+    def message(sid, data):
+        msg = data["message"]
+        roomId = data["room"]
+        sio.emit('createMessage', data={'message':msg},room=roomId,skip_sid=sid)
+
+    @sio.event
+    def disconnect(sid):
+        sio.emit('user-disconnected', data={'userId':userId},room=roomId)
+
+    @sio.event
+    def leave(sid,message):
+        roomId = message['roomId']
+        url = 'index'
+                    
+        sio.leave_room(sid,roomId)
+
+        if (roomId in numClients.keys()):
+            if (userId in numClients[roomId]):
+                numClients[roomId].remove(userId)
+            if (len(numClients[roomId]) == 0):
+                del numClients[roomId]
+
+        sio.emit('user-left', room=roomId)
+        sio.emit('user-disconnected', data={'userId':userId},room=roomId)
+        sio.emit('redirect',{'url':url}, to=sid)
+
+    @sio.event
+    def initial_video(sid, data):
+        sio.emit('detect-status', data=data,room=roomId,skip_sid=sid)
+
+    @sio.event
+    def toggle_video(sid, data):
+        sio.emit('change_status', data=data,room=data['roomId'],skip_sid=sid)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @sio.event
 def my_event(sid, message):
