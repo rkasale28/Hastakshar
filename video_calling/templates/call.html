@@ -45,6 +45,11 @@
         <input id="chat_message" type="text" placeholder="Type message here...">
     </div>
     
+    <script>
+        var user_id = "{{user.user.secondary_id}}"
+        
+        var myPeer = new Peer(id = user_id)
+    </script> 
     <script type="text/javascript" src="{%static 'js/call.js'%}"></script>
     {% else %}
     <a class="btn">Login</a>

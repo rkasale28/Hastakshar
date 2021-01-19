@@ -1,5 +1,3 @@
-var myPeer = new Peer()
-
 var audio_map = new Map([[true, "Mute"], [false, "Unmute"]])
 var video_map = new Map([[true, "Stop Video"], [false, "Start Video"]])
 
