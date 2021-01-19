@@ -13,6 +13,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 import re
 from urllib.parse import urlencode
+from django.utils.crypto import get_random_string
 # from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -35,9 +36,10 @@ def register_submit(request):
 			uname = request.POST["username"]
 			pwd1 = request.POST["password1"]
 			images = request.FILES['profile_picture'] if 'profile_picture' in request.FILES else 'profile_pics/default.jpg'
+			unique_id = get_random_string(length = 32)
 						
 			user = hUser.objects.create_user(first_name=fname,last_name=lname,email=email,username=uname,password=pwd1)
-			profile = User(user = user, profile_picture = images)
+			profile = User(user = user, profile_picture = images, secondary_id = unique_id)
 			profile.save()
 
 			user = auth.authenticate(username=uname,password=pwd1)
