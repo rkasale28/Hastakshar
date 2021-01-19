@@ -6,24 +6,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Set Preferences</title>
-
+    <title>Welcome</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.min.js"></script>
-
-    <link rel="stylesheet" href="{%static 'css/user_preferences.css'%}">
+    <script type="text/javascript" src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <link rel="stylesheet" href="{%static 'css/call.css'%}">
 </head>
 
 <body>
     {% if user.is_authenticated %}
-    <h2>Set Preferences</h2>
-    <div id="myVideo" class="content">
-        <div class="overlay">
-            <img src="{{user.user.profile_picture.url}}">
-            <p>{{user.first_name}} {{user.last_name}}</p>
-        </div>
+    <h2>Video</h2>
+    <div id="video-grid" class="container">
+
     </div>
 
     <div class="container">
@@ -35,12 +30,22 @@
             Video
         </button>
 
-        <button id="join">
-            Join Room
+        <button id="leave_room">
+            Leave Room
         </button>
     </div>
 
-    <script type="text/javascript" src="{%static 'js/user_preferences.js'%}"></script>
+    <h2>Chat</h2>
+    <div id="chat_section">
+        <ul id="messages">
+
+        </ul>
+    </div>
+    <div id="chat_input">
+        <input id="chat_message" type="text" placeholder="Type message here...">
+    </div>
+    
+    <script type="text/javascript" src="{%static 'js/call.js'%}"></script>
     {% else %}
     <a class="btn" href="/login/?next=/join/user-preferences">Login</a>
     <p style="text-align:center; color: red">Login error! Kindly Login first, to continue!</p>

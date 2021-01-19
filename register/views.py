@@ -47,13 +47,15 @@ def register_submit(request):
 		return redirect('/register')
 
 def login(request):
+	next = request.GET.get('next')
 	login = LoginForm()
-	return render(request, template_name="register/login.html", context={"login_form":login})
+	return render(request, template_name="register/login.html", context={"login_form":login,"next":next})
 
 def login_submit(request):
 	if (request.method=='POST'):
 		uname = request.POST["username"]
 		pwd = request.POST["password"]
+		next = request.POST["next"]
 		user = auth.authenticate(username=uname,password=pwd)
 		if user is None:
 			messages.warning(request, 'Invalid credentials!')
@@ -64,7 +66,10 @@ def login_submit(request):
 			U = cookies.SimpleCookie()
 			U['username'] = user
 			# messages.success(request, 'You have successfully signed-in!')
-			return redirect("/")
+			if (next == "None"):
+				return redirect("/")
+			else:
+				return redirect(next)
 	else:
 		return redirect('/login')
 

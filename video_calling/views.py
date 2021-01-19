@@ -7,6 +7,7 @@ import os
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from uuid import uuid4
 from urllib.parse import urlencode
@@ -35,12 +36,17 @@ def background_thread():
         sio.emit('my_response', {'data': 'Server generated event'},
                  namespace='/test')
 
-
 def user_preferences(request):
     global thread
     if thread is None:
         thread = sio.start_background_task(background_thread)
     return render(request, "user_preferences.html", {})
+
+def call(request):
+    global thread
+    if thread is None:
+        thread = sio.start_background_task(background_thread)
+    return render(request, "call.html", {})
 
 @sio.event
 def generate(sid):
@@ -48,7 +54,7 @@ def generate(sid):
     val = dumps(val, uuid_mode=UM_HEX)
     val = val.replace('"', '')
 
-    base_url = '/call'
+    base_url = '/join/call'
     query_string =  urlencode({'roomId': val})
     url = '{}?{}'.format(base_url,query_string)
                 
