@@ -2,6 +2,7 @@ import re
 from django.contrib.auth.models import User, auth
 from django.http import JsonResponse
 from validate_email import validate_email as valid_email
+from .models import User as hUser
 
 def validate_email(request):
 	email = request.GET.get('email', None)
@@ -65,4 +66,16 @@ def get_email(request):
         'email': user.email		
     }
 	
+	return JsonResponse(data)
+
+def get_data(request):
+	userid = request.GET.get('userid', None)
+
+	huser = hUser.objects.get(secondary_id=userid)
+
+	data = {
+		'full_name' : huser.user.first_name + " " + huser.user.last_name,
+		'profile_picture' : huser.profile_picture.url
+	}
+
 	return JsonResponse(data)

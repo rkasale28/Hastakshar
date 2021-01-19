@@ -191,23 +191,34 @@ const connectToNewUser = function (userId, stream) {
 }
 
 const createVideoElement = function(video){
-    const content = (video.id=="sender")?"Me":video.id
-    const src = (video.id=="sender")?"sender":"recipient"
+    const temp_id = (video.id=="sender")?myPeer.id:video.id
 
     const myDiv_parent = document.createElement('div')
     myDiv_parent.classList.add("content")
-    
-    const myDiv_child = document.createElement('div')
-    myDiv_child.classList.add("overlay")
-    myDiv_child.innerHTML = 
-        `<img src="/images/${src}.png">\
-        <h2>${content}</h2>`
+       
+    $.ajax({
+        url: '../ajax/get_data/',
+        data: {
+            'userid': temp_id
+        },
+        async:false,
+        dataType: 'json',
+        success: function (data) {
+            const content = data.full_name
+            const src = data.profile_picture
+            
+            const myDiv_child = document.createElement('div')
+            myDiv_child.classList.add("overlay")
+            myDiv_child.innerHTML = 
+                `<img src="${src}">\
+                <h2>${content}</h2>`
 
-    myDiv_parent.append(myDiv_child)
-    myDiv_parent.append(video)
+            myDiv_parent.append(myDiv_child)
+            myDiv_parent.append(video)
 
-    myDiv_parent.classList.add(video.classList.item(0))
-
+            myDiv_parent.classList.add(video.classList.item(0))
+        }
+    });   
     return myDiv_parent
 }
 
