@@ -43,9 +43,13 @@ $(document).ready(function(){
     })
 
     $("#join").click(function(){
+        roomId = $("#roomId").val()
+
+        if (roomId == "None") roomId = "None"
+
         $.cookie("audio", myVideoStream.getAudioTracks()[0].enabled);
         $.cookie("video", myVideoStream.getVideoTracks()[0].enabled);
-        socket.emit('generate');
+        socket.emit('generate', { roomId: roomId});
         return false;
     })
 

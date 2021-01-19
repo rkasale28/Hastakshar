@@ -37,10 +37,12 @@ def background_thread():
                  namespace='/test')
 
 def user_preferences(request):
+    roomId = request.GET.get('roomId')
+	
     global thread
     if thread is None:
         thread = sio.start_background_task(background_thread)
-    return render(request, "user_preferences.html", {})
+    return render(request, "user_preferences.html", {"roomId":roomId})
 
 def call(request):
     global thread
@@ -49,10 +51,15 @@ def call(request):
     return render(request, "call.html", {})
 
 @sio.event
-def generate(sid):
-    val = uuid4()
-    val = dumps(val, uuid_mode=UM_HEX)
-    val = val.replace('"', '')
+def generate(sid,message):
+    roomId = message['roomId']
+
+    if (roomId == "None"):
+        val = uuid4()
+        val = dumps(val, uuid_mode=UM_HEX)
+        val = val.replace('"', '')
+    else:
+        val = roomId
 
     base_url = '/join/call'
     query_string =  urlencode({'roomId': val})

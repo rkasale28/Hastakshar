@@ -18,7 +18,7 @@ $(document).ready(function () {
     
     if(roomId==null){
         alert("Access Prohibited")
-        window.location.href = "\index"
+        window.location.href = "/"
     }
 
     let myVideoStream
@@ -125,7 +125,7 @@ $(document).ready(function () {
         }
         else{            
             alert("Lobby Full")
-            window.location.href = "\index"
+            window.location.href = "/"
         }
 
     })

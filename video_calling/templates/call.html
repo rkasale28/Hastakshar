@@ -47,8 +47,9 @@
     
     <script type="text/javascript" src="{%static 'js/call.js'%}"></script>
     {% else %}
-    <a class="btn" href="/login/?next=/join/user-preferences">Login</a>
+    <a class="btn">Login</a>
     <p style="text-align:center; color: red">Login error! Kindly Login first, to continue!</p>
+    <script type="text/javascript" src="{%static 'js/call_login_error.js'%}"></script>
     {% endif %}
 </body>
 

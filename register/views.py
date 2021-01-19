@@ -12,6 +12,7 @@ from http import cookies
 from django.conf import settings
 from django.core.mail import send_mail
 import re
+from urllib.parse import urlencode
 # from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -48,14 +49,17 @@ def register_submit(request):
 
 def login(request):
 	next = request.GET.get('next')
+	roomId = request.GET.get('roomId')
 	login = LoginForm()
-	return render(request, template_name="register/login.html", context={"login_form":login,"next":next})
+	return render(request, template_name="register/login.html", context={"login_form":login,"next":next,"roomId":roomId})
 
 def login_submit(request):
 	if (request.method=='POST'):
 		uname = request.POST["username"]
 		pwd = request.POST["password"]
 		next = request.POST["next"]
+		roomId = request.POST["roomId"]
+
 		user = auth.authenticate(username=uname,password=pwd)
 		if user is None:
 			messages.warning(request, 'Invalid credentials!')
@@ -69,7 +73,13 @@ def login_submit(request):
 			if (next == "None"):
 				return redirect("/")
 			else:
-				return redirect(next)
+				if (roomId == "None"):
+					return redirect(next)
+				else:
+					base_url = next
+					query_string =  urlencode({'roomId': roomId})
+					url = '{}?{}'.format(base_url,query_string)   
+					return redirect(url) 
 	else:
 		return redirect('/login')
 
