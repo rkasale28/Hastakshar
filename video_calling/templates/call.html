@@ -7,10 +7,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
+
     <script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script> 
+  
+
     <link rel="stylesheet" href="{%static 'css/call.css'%}">
 </head>
 
@@ -33,8 +40,36 @@
         <button id="leave_room">
             Leave Room
         </button>
+
+        <button type="button" data-toggle="modal" data-target="#myModal">Invite User</button>
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Invite User</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" id ="mail" placeholder="Enter Username">
+                        <button id="submit" class="btn btn-success" data-dismiss="modal" disabled>Submit</button>
+                        <div>
+                            <div class="text-danger messages">
+                                <p id="username-error-1" style="display: none;">Username does not exist</p>
+                                <p id="username-error-2" style="display: none;">You can't invite yourself</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
+    <h2 id="content"></h2>
     <h2>Chat</h2>
     <div id="chat_section">
         <ul id="messages">
@@ -44,13 +79,15 @@
     <div id="chat_input">
         <input id="chat_message" type="text" placeholder="Type message here...">
     </div>
-    
+
     <script>
         var user_id = "{{user.user.secondary_id}}"
         var username = "{{user.username}}"
-        
+        var full_name = "{{user.first_name}}" + " " + "{{user.last_name}}"
+
         var myPeer = new Peer(id = user_id)
-    </script> 
+    </script>
+    <script type="text/javascript" src="{%static 'js/common.js'%}"></script>
     <script type="text/javascript" src="{%static 'js/call.js'%}"></script>
     {% else %}
     <a class="btn">Login</a>

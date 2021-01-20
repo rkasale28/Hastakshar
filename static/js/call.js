@@ -5,24 +5,24 @@ const peers = {}
 
 var socket = io.connect();
 
-var audio_enabled = ($.cookie("audio_"+username)==="true");
-var video_enabled = ($.cookie("video_"+username)==="true");
+var audio_enabled = ($.cookie("audio_" + username) === "true");
+var video_enabled = ($.cookie("video_" + username) === "true");
 
 let sender, reciever
-    
+
 $(document).ready(function () {
     let searchParams = new URLSearchParams(window.location.search)
     let roomId = searchParams.get('roomId')
-    
-    if(roomId==null){
+
+    if (roomId == null) {
         alert("Access Prohibited")
         window.location.href = "/"
     }
 
-    if ((typeof $.cookie("audio_"+username) === 'undefined') || (typeof $.cookie("video_"+username) === 'undefined')){
-        window.location.href = "/join/user-preferences?roomId="+roomId
+    if ((typeof $.cookie("audio_" + username) === 'undefined') || (typeof $.cookie("video_" + username) === 'undefined')) {
+        window.location.href = "/join/user-preferences?roomId=" + roomId
     }
-        
+
     let myVideoStream
 
     const myVideo = document.createElement("video");
@@ -30,7 +30,7 @@ $(document).ready(function () {
     myVideo.muted = true;
     myVideo.id = "sender"
     myDiv = createVideoElement(myVideo)
-    
+
     navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true
@@ -47,7 +47,7 @@ $(document).ready(function () {
 
         myPeer.on('call', call => {
             call.answer(stream)
-            socket.emit('initial_video',{'video':video_enabled})
+            socket.emit('initial_video', { 'video': video_enabled })
 
             const video = document.createElement('video')
             video.classList.add("recipient")
@@ -56,7 +56,7 @@ $(document).ready(function () {
 
             // Recipient's video stream
             call.on('stream', userVideoStream => {
-                if(!peers[call.peer]){
+                if (!peers[call.peer]) {
                     addVideoStream(div, userVideoStream, reciever.video)
                 }
             })
@@ -83,22 +83,22 @@ $(document).ready(function () {
             window.location.href = data.url
         })
 
-        socket.on('change_status',function(data){
+        socket.on('change_status', function (data) {
             userId = "#" + data.userId + " "
-            
-            if (data.status){
-                $(userId + "video").css("display","flex");
-                $(userId + ".overlay").css("display","none");
+
+            if (data.status) {
+                $(userId + "video").css("display", "flex");
+                $(userId + ".overlay").css("display", "none");
             }
-            else{
-                $(userId + "video").css("display","none");
-                $(userId + ".overlay").css("display","flex");
+            else {
+                $(userId + "video").css("display", "none");
+                $(userId + ".overlay").css("display", "flex");
             }
         })
 
     })
 
-    socket.on('user-disconnected',function(dict){
+    socket.on('user-disconnected', function (dict) {
         userId = dict.userId
         if (peers[userId]) peers[userId].close()
     })
@@ -106,11 +106,11 @@ $(document).ready(function () {
     // Use constructor
     myPeer.on('open', function (id) {
         sender = id
-        socket.emit('get_clients', {'roomId' : roomId, 'userId': id })
+        socket.emit('get_clients', { 'roomId': roomId, 'userId': id })
         // socket.emit('join_room', { roomId: roomId, userId: id });
     })
 
-    socket.on('detect-status',function(data){
+    socket.on('detect-status', function (data) {
         reciever = data
     })
 
@@ -119,13 +119,13 @@ $(document).ready(function () {
         console.log("User Left")
     })
 
-    socket.on('grant_entry',function(dict){
-        if(dict['decision']){
+    socket.on('grant_entry', function (dict) {
+        if (dict['decision']) {
             roomId = dict['roomId']
             id = dict['userId']
             socket.emit('join_room', { roomId: roomId, userId: id });
         }
-        else{            
+        else {
             alert("Lobby Full")
             window.location.href = "/"
         }
@@ -135,8 +135,8 @@ $(document).ready(function () {
     $("#audio").click(function () {
         audio_enabled = myVideoStream.getAudioTracks()[0].enabled
         myVideoStream.getAudioTracks()[0].enabled = !audio_enabled;
-        
-        $.cookie("audio_"+username, myVideoStream.getAudioTracks()[0].enabled);
+
+        $.cookie("audio_" + username, myVideoStream.getAudioTracks()[0].enabled);
         $("#audio").html(audio_map.get(!audio_enabled))
     })
 
@@ -144,30 +144,88 @@ $(document).ready(function () {
         video_enabled = myVideoStream.getVideoTracks()[0].enabled
         myVideoStream.getVideoTracks()[0].enabled = !video_enabled;
 
-        $.cookie("video_"+username, myVideoStream.getVideoTracks()[0].enabled);
+        $.cookie("video_" + username, myVideoStream.getVideoTracks()[0].enabled);
         $("#video").html(video_map.get(!video_enabled))
 
-        if (video_enabled){
-            $("#sender video").css("display","none");
-            $("#sender .overlay").css("display","flex");
+        if (video_enabled) {
+            $("#sender video").css("display", "none");
+            $("#sender .overlay").css("display", "flex");
         }
-        else{
-            $("#sender video").css("display","flex");
-            $("#sender .overlay").css("display","none");
+        else {
+            $("#sender video").css("display", "flex");
+            $("#sender .overlay").css("display", "none");
         }
-      
-        socket.emit('toggle_video',{ roomId: roomId, userId : myPeer.id, status: !video_enabled})
+
+        socket.emit('toggle_video', { roomId: roomId, userId: myPeer.id, status: !video_enabled })
     })
 
     $("#leave_room").click(function () {
-        $.removeCookie("audio_"+username)
-        $.removeCookie("video_"+username)
+        $.removeCookie("audio_" + username)
+        $.removeCookie("video_" + username)
         socket.emit('leave', { roomId: roomId });
     })
 
-    window.onunload = function(e){
+    window.onunload = function (e) {
         socket.emit('leave', { roomId: roomId });
     }
+
+    $("#mail").keyup(function () {
+        var user_name = $(this).val().trim();
+
+        $.ajax({
+            url: '../ajax/validate_username_exists/',
+            data: {
+                'username': user_name
+            },
+            dataType: 'json',
+            success: function (data) {
+                display("#username-error-1", data.exists)
+                display("#username-error-2", user_name === username)
+                enable("#submit", (data.exists) || (user_name === username) || user_name == "")
+            }
+        });
+    });
+
+    $("#submit").click(function () {
+        reciever = $('#mail').val().trim()
+        var url = window.location.href
+        
+        let searchParams = new URLSearchParams(window.location.search)
+        let roomId = searchParams.get('roomId')
+            
+        $("#mail").val("")
+
+        $.ajax({
+            url: '../ajax/get_email/',
+            data: {
+                'username': reciever
+            },
+            dataType: 'json',
+            success: function (data) {
+                mail = data.email;
+
+                var msg = "Dear " + reciever + ",<br>"+
+                full_name + " has invited you to join the meeting. <br>"+
+                "Following is the link: <a href='" + url + "'>"+url+"</a>.<br>"+
+                "Following is the room code: " + roomId + 
+                "<br><br>--<br>Warm Regards,<br>Support Team at Hastakshar"
+
+                Email.send({
+                    Host: "smtp.gmail.com",
+                    Username: "hastakshar.noreply@gmail.com",
+                    Password: "Password_1",
+                    To: mail,
+                    From: "hastakshar.noreply@gmail.com",
+                    Subject: "Invite for meeting",
+                    Body: msg
+                })
+                    .then(function (message) {
+                        alert("Invite sent successfully to reciever!")
+                    });
+            }
+        });
+    })
+
 })
 
 const connectToNewUser = function (userId, stream) {
@@ -175,15 +233,15 @@ const connectToNewUser = function (userId, stream) {
     console.log(userId)
 
     const call = myPeer.call(userId, stream)
-    socket.emit('initial_video',{'video':video_enabled})   
+    socket.emit('initial_video', { 'video': video_enabled })
 
     const video = document.createElement('video')
     video.classList.add("recipient")
     video.id = call.peer
     div = createVideoElement(video)
-    
+
     // Recipient's Video Stream
-    call.on('stream', userVideoStream => {    
+    call.on('stream', userVideoStream => {
         addVideoStream(div, userVideoStream, reciever.video)
     })
 
@@ -194,26 +252,26 @@ const connectToNewUser = function (userId, stream) {
     peers[userId] = call
 }
 
-const createVideoElement = function(video){
-    const temp_id = (video.id=="sender")?myPeer.id:video.id
+const createVideoElement = function (video) {
+    const temp_id = (video.id == "sender") ? myPeer.id : video.id
 
     const myDiv_parent = document.createElement('div')
     myDiv_parent.classList.add("content")
-       
+
     $.ajax({
         url: '../ajax/get_data/',
         data: {
             'userid': temp_id
         },
-        async:false,
+        async: false,
         dataType: 'json',
         success: function (data) {
             const content = data.full_name
             const src = data.profile_picture
-            
+
             const myDiv_child = document.createElement('div')
             myDiv_child.classList.add("overlay")
-            myDiv_child.innerHTML = 
+            myDiv_child.innerHTML =
                 `<img src="${src}">\
                 <h2>${content}</h2>`
 
@@ -222,16 +280,16 @@ const createVideoElement = function(video){
 
             myDiv_parent.classList.add(video.classList.item(0))
         }
-    });   
+    });
     return myDiv_parent
 }
 
 const addVideoStream = function (div, stream, status = null) {
     video = div.getElementsByTagName("video")[0]
     overlay = div.getElementsByClassName("overlay")[0]
-    
-    if (video.hasAttribute("id")){
-        div.setAttribute("id",video.id)
+
+    if (video.hasAttribute("id")) {
+        div.setAttribute("id", video.id)
         video.removeAttribute("id")
 
         video.srcObject = stream
@@ -240,17 +298,17 @@ const addVideoStream = function (div, stream, status = null) {
             video.play()
         })
 
-        if (status!=null){
-            if (status){
+        if (status != null) {
+            if (status) {
                 video.style.display = "flex"
                 overlay.style.display = "none"
             }
-            else{
+            else {
                 video.style.display = "none"
                 overlay.style.display = "flex"
             }
         }
-        
+
         $('#video-grid').append(div)
     }
 }    
