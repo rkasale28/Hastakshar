@@ -5,8 +5,8 @@ const peers = {}
 
 var socket = io.connect();
 
-var audio_enabled = ($.cookie("audio")==="true");
-var video_enabled = ($.cookie("video")==="true");
+var audio_enabled = ($.cookie("audio_"+username)==="true");
+var video_enabled = ($.cookie("video_"+username)==="true");
 
 let sender, reciever
     
@@ -19,6 +19,10 @@ $(document).ready(function () {
         window.location.href = "/"
     }
 
+    if ((typeof $.cookie("audio_"+username) === 'undefined') || (typeof $.cookie("video_"+username) === 'undefined')){
+        window.location.href = "/join/user-preferences?roomId="+roomId
+    }
+        
     let myVideoStream
 
     const myVideo = document.createElement("video");
@@ -132,7 +136,7 @@ $(document).ready(function () {
         audio_enabled = myVideoStream.getAudioTracks()[0].enabled
         myVideoStream.getAudioTracks()[0].enabled = !audio_enabled;
         
-        $.cookie("audio", myVideoStream.getAudioTracks()[0].enabled);
+        $.cookie("audio_"+username, myVideoStream.getAudioTracks()[0].enabled);
         $("#audio").html(audio_map.get(!audio_enabled))
     })
 
@@ -140,7 +144,7 @@ $(document).ready(function () {
         video_enabled = myVideoStream.getVideoTracks()[0].enabled
         myVideoStream.getVideoTracks()[0].enabled = !video_enabled;
 
-        $.cookie("video", myVideoStream.getVideoTracks()[0].enabled);
+        $.cookie("video_"+username, myVideoStream.getVideoTracks()[0].enabled);
         $("#video").html(video_map.get(!video_enabled))
 
         if (video_enabled){
@@ -156,8 +160,8 @@ $(document).ready(function () {
     })
 
     $("#leave_room").click(function () {
-        $.removeCookie("audio")
-        $.removeCookie("video")
+        $.removeCookie("audio_"+username)
+        $.removeCookie("video_"+username)
         socket.emit('leave', { roomId: roomId });
     })
 

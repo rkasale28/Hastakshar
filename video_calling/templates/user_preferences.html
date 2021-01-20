@@ -42,6 +42,9 @@
         </button>
     </div>
 
+    <script type="text/javascript">
+        var username = "{{user.username}}"
+    </script>
     <script type="text/javascript" src="{%static 'js/user_preferences.js'%}"></script>
     {% else %}
     <a class="btn" href="/login/?next=/join/user-preferences">Login</a>

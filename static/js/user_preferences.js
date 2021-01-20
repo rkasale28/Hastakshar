@@ -47,8 +47,8 @@ $(document).ready(function(){
 
         if (roomId == "None") roomId = "None"
 
-        $.cookie("audio", myVideoStream.getAudioTracks()[0].enabled);
-        $.cookie("video", myVideoStream.getVideoTracks()[0].enabled);
+        $.cookie("audio_"+username, myVideoStream.getAudioTracks()[0].enabled);
+        $.cookie("video_"+username, myVideoStream.getVideoTracks()[0].enabled);
         socket.emit('generate', { roomId: roomId});
         return false;
     })
