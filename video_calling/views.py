@@ -8,6 +8,7 @@ import os
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from uuid import uuid4
 from urllib.parse import urlencode
@@ -26,7 +27,6 @@ def index(request):
     if thread is None:
         thread = sio.start_background_task(background_thread)
     return HttpResponse(open(os.path.join(basedir, 'templates/index.html')))
-
 
 def background_thread():
     """Example of how to send server generated events to clients."""
@@ -50,6 +50,13 @@ def call(request):
     if thread is None:
         thread = sio.start_background_task(background_thread)
     return render(request, "call.html", {})
+
+def left(request):
+    global thread
+    if thread is None:
+        thread = sio.start_background_task(background_thread)
+    
+    return render(request, 'left.html')
 
 @sio.event
 def generate(sid,message):
@@ -109,7 +116,7 @@ def join_room(sid,message):
     @sio.event
     def leave(sid,message):
         roomId = message['roomId']
-        url = 'index'
+        url = '/join/left'
                     
         sio.leave_room(sid,roomId)
 
