@@ -79,3 +79,13 @@ def get_data(request):
 	}
 
 	return JsonResponse(data)
+
+def validate_roomcode(request):
+	roomcode = request.GET.get('roomcode', None)
+	
+	data = {
+		'special_character': bool(set('[~!-@#$%^&*()_+{}":;\']+$').intersection(roomcode)),
+		'length' : (len(roomcode)!=32)
+    }
+	
+	return JsonResponse(data)
