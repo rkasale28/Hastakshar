@@ -66,8 +66,8 @@ $(document).ready(function () {
             connectToNewUser(dict.userId, stream)
         })
 
-        let text = $("input");
-        $('html').keydown(function (e) {
+        let text = $("#chat_message");
+        $('#chat_message').keydown(function (e) {
             if (e.which == 13 && text.val().length !== 0) {
                 socket.emit('message', { "message": text.val(), "room": roomId });
                 $("#messages").append(`<li class="message"><b>sent</b><br/>${text.val()}</li>`);
