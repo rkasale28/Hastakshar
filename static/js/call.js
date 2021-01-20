@@ -47,7 +47,7 @@ $(document).ready(function () {
 
         myPeer.on('call', call => {
             call.answer(stream)
-            socket.emit('initial_video', { 'video': video_enabled })
+            socket.emit('initial_video', { 'video': ($.cookie("video_" + username) === "true") })
 
             const video = document.createElement('video')
             video.classList.add("recipient")
@@ -187,7 +187,7 @@ $(document).ready(function () {
     });
 
     $("#submit").click(function () {
-        reciever = $('#mail').val().trim()
+        reciever_name = $('#mail').val().trim()
         var url = window.location.href
         
         let searchParams = new URLSearchParams(window.location.search)
@@ -198,13 +198,13 @@ $(document).ready(function () {
         $.ajax({
             url: '../ajax/get_email/',
             data: {
-                'username': reciever
+                'username': reciever_name
             },
             dataType: 'json',
             success: function (data) {
                 mail = data.email;
 
-                var msg = "Dear " + reciever + ",<br>"+
+                var msg = "Dear " + reciever_name + ",<br>"+
                 full_name + " has invited you to join the meeting. <br>"+
                 "Following is the link: <a href='" + url + "'>"+url+"</a>.<br>"+
                 "Following is the room code: " + roomId + 
@@ -233,7 +233,7 @@ const connectToNewUser = function (userId, stream) {
     console.log(userId)
 
     const call = myPeer.call(userId, stream)
-    socket.emit('initial_video', { 'video': video_enabled })
+    socket.emit('initial_video', { 'video': ($.cookie("video_" + username) === "true") })
 
     const video = document.createElement('video')
     video.classList.add("recipient")
