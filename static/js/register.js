@@ -1,22 +1,20 @@
-$('#div_id_profile_picture').css("display", "none");
-
 function sendEmail() {
-    var bool = $('#firstname-error-1').css('display') == 'none' &&
-    $('#lastname-error-1').css('display') == 'none' &&
-    $('#email-error-1').css('display') == 'none' &&
+    var bool = $("#id_first_name").val().trim() != '' &&
+    $("#id_last_name").val().trim() != '' &&
+    $("#id_email").val().trim() != '' &&
     $('#email-error-2').css('display') == 'none' &&
-    $('#username-error-1').css('display') == 'none' &&
+    $("#id_username").val().trim() != '' &&
     $('#username-error-2').css('display') == 'none' &&
     $('#username-error-3').css('display') == 'none' &&
     $('#username-error-4').css('display') == 'none' &&
     $('#username-error-5').css('display') == 'none' &&
-    $('#password-error-1').css('display') == 'none' &&
+    $("#id_password1").val().trim() != '' &&
     $('#password-error-2').css('display') == 'none' &&
     $('#password-error-3').css('display') == 'none' &&
     $('#password-error-4').css('display') == 'none' &&
     $('#password-error-5').css('display') == 'none' &&
     $('#password-error-6').css('display') == 'none' &&
-    $('#password2-error-1').css('display') == 'none' &&
+    $("#id_password2").val().trim() != '' &&
     $('#password2-error-2').css('display') == 'none'
 
     if (bool){
