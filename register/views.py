@@ -61,11 +61,12 @@ def login_submit(request):
 		pwd = request.POST["password"]
 		next = request.POST["next"]
 		roomId = request.POST["roomId"]
-
+		url = request.POST["url"]
+		
 		user = auth.authenticate(username=uname,password=pwd)
 		if user is None:
 			messages.warning(request, 'Invalid credentials!')
-			return redirect('/login')
+			return redirect(url)
 		else:
 			userProfile = User.objects.get(user = user)
 			auth.login(request, user)
