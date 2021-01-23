@@ -20,11 +20,12 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <img class="d-block w-80 mx-auto" src="{%static 'images/logo.jpg'%}" width="50"
             style="padding: 5px; border-radius: 50%">
-        <a class="navbar-brand" href="/">&nbsp;Home</a>        
+        <a class="navbar-brand" href="/">&nbsp;Home</a>
+        <a class="navbar-brand" style='padding-left : 131px' href="#"><div id="clockbox"></div></a>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="nav navbar-nav pull-right">
                 <li>
-                    <p><a class="nav-link" style='padding-left : 1122px' href="../view_profile/">नमस्ते,
+                    <p><a class="nav-link" style='padding-left : 700px' href="../view_profile/">नमस्ते,
                             <b><i>{{user.username}}&nbsp;&nbsp;&nbsp;</i></a></b>
                     </p>
                 </li>
@@ -35,9 +36,7 @@
             </ul>
         </div>
     </nav>
-
     <div class="container d-flex justify-content-center" style="padding: 10px;">
-
         <div class="text-center">
             <img src="{{user.user.profile_picture.url}}" width="250" class="rounded-circle"
                 style=" box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
@@ -48,13 +47,10 @@
             <!-- <span class="mt-1 clearfix">Add more here</span>  -->
             <!-- <small class="mt-4">I am an android developer working at google Inc at california,USA</small> -->
         </div>
-
     </div>
+    <script type="text/javascript" src="{%static 'js/time.js'%}"></script>
     <footer>
         <p>Made with &#128151 by <i>Team HastAkshar</i></p>
     </footer>
-
-
 </body>
-
 </html>
