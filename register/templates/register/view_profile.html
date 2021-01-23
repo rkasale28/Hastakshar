@@ -24,6 +24,7 @@
         <a class="navbar-brand" style='padding-left : 131px' href="#"><div id="clockbox"></div></a>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="nav navbar-nav pull-right">
+                {% if user.is_authenticated %}
                 <li>
                     <p><a class="nav-link" style='padding-left : 700px' href="../view_profile/">नमस्ते,
                             <b><i>{{user.username}}&nbsp;&nbsp;&nbsp;</i></a></b>
@@ -49,6 +50,15 @@
         </div>
     </div>
     <script type="text/javascript" src="{%static 'js/time.js'%}"></script>
+    {% else %}
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <p style="text-align:center; color: red">Login error! Kindly <a href="/login/">Login</a> first, to continue!
+    </p>
+    {% endif %}
+
     <footer>
         <p>Made with &#128151 by <i>Team HastAkshar</i></p>
     </footer>

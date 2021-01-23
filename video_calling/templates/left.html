@@ -1,26 +1,51 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Left the room</title>
+    <title>Leaving Room </title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="{%static 'css/styles.css'%}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
-    <h1 class="text-success">You have successfully left the room</h1>
-
-    <h2>You will be redirected to home page in few seconds</h2>
-
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img class="d-block w-80 mx-auto" src="{%static 'images/logo.jpg'%}" width="50"
+            style="padding: 5px; border-radius: 50%">
+        <a class="navbar-brand" href="#">&nbsp;<b><i>HastAkshar</i></b></a>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="nav navbar-nav pull-right">
+                {% if user.is_authenticated %}
+            </ul>
+        </div>
+    </nav>
+    <div class="text-center">
+        <br><br><br><br>
+        <p style="color:rgb(14, 134, 14)">You have successfully left the room!</p>
+        <p>You will be redirected to home page in few seconds...</p>
+    </div>
     <script type="text/javascript" src="{%static 'js/left.js'%}"></script>
-   
+    {% else %}
+    </ul>
+    </div>
+    </nav>
+    <br>
+    <p style="text-align:center; color: red">Login error! Kindly <a href="/login/">Login</a> first, to continue!
+    </p>
+    {% endif %}
+
+    <footer>
+        <p>Made with &#128151 by <i>Team HastAkshar</i></p>
+    </footer>
 </body>
 
 </html>
