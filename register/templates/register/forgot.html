@@ -15,10 +15,24 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img class="d-block w-80 mx-auto" src="{%static 'images/logo.jpg'%}" width="50"
+          style="padding: 5px; border-radius: 50%">
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <!-- Enter another tab piece information here -->
+        </div>
+      </nav>
     <!-- Page content -->
     <div class="main">
         <div class="row justify-content-center">
             <div class="col-8">
+                <h3 style="text-align:center;">Rest your password to be able keep in touch with us...</h3>
+        <br>
                 <form method="POST" action="../forgot_submit" class="form-group" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div id="div_id_username" class="form-group">
@@ -60,7 +74,7 @@
                         </div>
                     </div>
 
-                    <input type="button" class="btn btn-info" value="Submit" onclick="enterPassword()" id="submit_button"
+                    <input type="button" class="btn btn-info" value="Verify OTP" onclick="enterPassword()" id="submit_button"
                         disabled style="display: none;"/>
 
                     <div id="div_id_password1" class="form-group" style="display: none;">
@@ -105,16 +119,21 @@
                         </div>
                     </div>
                     
-                    <button type="submit" class="btn btn-success" id="submit" disabled style="display:none">Change Password</button>
+                    <button type="submit" class="btn btn-success" id="submit" disabled style="display:none">Reset Password</button>
                 </form>
+                <div class='text-right'>
+                    <p>Nahh, I remember...I'll <a href="/login/">Login instead</a>!</p>
+                </div>
+                
 
-                <footer>
-                    <p>Know your password? <a href="/login/">Login instead</a>!</p>
-                </footer>
+               
 
             </div>
         </div>
     </div>
+    <footer>
+        <p style='padding-left : 640px'>Made with &#128151 by <i>Team HastAkshar</i></p>
+    </footer>
 
     <script type="text/javascript" src="{%static 'js/common.js'%}"></script>
     <script type="text/javascript" src="{%static 'validation/forgot.js'%}"></script>

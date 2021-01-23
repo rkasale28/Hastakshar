@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-    <title>Account Registration</title>
+    <title>HastAkshar Registration</title>
 
     <script src="https://smtpjs.com/v3/smtp.js"> </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -41,6 +41,12 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
+
+                <h3 style="text-align:center;">A simple, one-time, registration nitty-gritty!</h3>
+                <div class='text-left'>
+                    <p>Already have a HastAkshar account? <a href="/login/">Login instead</a>!</p>
+                </div>
+                
 
                 <form method="POST" action="../register_submit" class="form-group" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -161,7 +167,7 @@
 
                     <div id="div_id_profile_picture" class="form-group" style="display: none;">
                         <label for="id_profile_picture">
-                            Profile picture
+                            Profile Picture
                         </label>
                         <div class="">
                             <input type="file" name="profile_picture" accept="image/*"
@@ -190,7 +196,7 @@
 
                     <input type="button" class="btn btn-info" value="Verify Email" onclick="sendEmail()"
                         id="otp_button" />
-                    <button type="submit" class="btn btn-success" id="submit" disabled>Register</button>
+                    <button type="submit" class="btn btn-success" id="submit" disabled>Join HastAkshar</button>
                 </form>
 
 
@@ -199,7 +205,7 @@
         </div>
     </div>
     <footer>
-        <p>Already have a HastAkshar account? <a href="/login/">Login instead</a>!</p>
+        <p style='padding-left : 640px'>Made with &#128151 by <i>Team HastAkshar</i></p>
     </footer>
 
     <script type="text/javascript" src="{%static 'js/common.js'%}"></script>

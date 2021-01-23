@@ -40,7 +40,7 @@ function sendEmail() {
     var mail = $("#id_email").val().trim()
     var user = $("#id_username").val().trim()
     
-    var msg = "Dear " + user + ",<br>Your OTP for Hastakshar Account Registration is: " + num + ".<br>Kindly DO NOT share this One-Time-Password with anyone!<br><br>--<br>Warm Regards,<br>Support Team at Hastakshar"
+    var msg = "Dear " + user + ",<br>Your OTP for HastAkshar Account Registration is: " + num + ".<br>Kindly DO NOT share this One-Time-Password with anyone!<br><br>--<br>Warm Regards,<br>Support Team at HastAkshar"
 
     Email.send({
         Host: "smtp.gmail.com",
@@ -48,7 +48,7 @@ function sendEmail() {
         Password: "Password_1",
         To: mail,
         From: "hastakshar.noreply@gmail.com",
-        Subject: "OTP for Hastakshar Account Registration",
+        Subject: "[IMPORTANT] OTP for HastAkshar Account Registration",
         Body: msg
     })
         .then(function (message) {

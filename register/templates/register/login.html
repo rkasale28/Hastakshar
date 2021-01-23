@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-  <title>Account Login</title>
+  <title>HastAkshar Login</title>
 
   <script src="https://smtpjs.com/v3/smtp.js"> </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -42,7 +42,8 @@
         </ul>
         {% endif %}
 
-        <h3>Welcome back, kindly Login in to video call your buddy!</h3>
+        <h3 style="text-align:center;">Welcome back, kindly Login to video call your buddy!</h3>
+        <br>
         <form method="POST" class="form-group" action="../login_submit">
           {% csrf_token %}
 
@@ -73,11 +74,17 @@
           </div>
 
           <button type="submit" , class="btn btn-success">Login</button>
+
+          <a style='padding-left : 800px' href="/forgot_password">Forgot Password</a>
+
         </form>
 
-        <div class="text-right">
-          <a href="/forgot_password">Forgot Password</a>
+        <div class='text-left'>
+          <p>New to Hasakshar WVCS? Don't have a HastAkshar account? Create one for free <a href="/register/">here</a>!
+          </p>
         </div>
+
+
 
 
       </div>
@@ -86,7 +93,7 @@
 
   </div>
   <footer>
-    <p>New to Hasakshar WVCS? Don't have a HastAkshar account? Create one for free <a href="/register/">here</a>!</p>
+    <p style='padding-left : 640px'>Made with &#128151 by <i>Team HastAkshar</i></p>
   </footer>
 
   <script type="text/javascript" src="{%static 'js/login.js'%}"></script>

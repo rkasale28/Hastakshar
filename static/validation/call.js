@@ -34,10 +34,10 @@ $("#submit").click(function () {
             mail = data.email;
 
             var msg = "Dear " + reciever_name + ",<br>"+
-            full_name + " has invited you to join the meeting. <br>"+
+            full_name + " has invited you to join the video call. <br>"+
             "Following is the link: <a href='" + url + "'>"+url+"</a>.<br>"+
             "Following is the room code: " + roomId + 
-            "<br><br>--<br>Warm Regards,<br>Support Team at Hastakshar"
+            "<br><br>--<br>Warm Regards,<br>Support Team at HastAkshar"
 
             Email.send({
                 Host: "smtp.gmail.com",
@@ -45,7 +45,7 @@ $("#submit").click(function () {
                 Password: "Password_1",
                 To: mail,
                 From: "hastakshar.noreply@gmail.com",
-                Subject: "Invite for meeting",
+                Subject: "Join the call now on HastAkshar!",
                 Body: msg
             })
                 .then(function (message) {
