@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/static/css/styles.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
     <script src="https://smtpjs.com/v3/smtp.js"> </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -18,42 +20,33 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <img class="d-block w-80 mx-auto" src="{%static 'images/logo.jpg'%}" width="50"
             style="padding: 5px; border-radius: 50%">
-        <a class="navbar-brand" href="/">&nbsp;Home</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand" href="/">&nbsp;Home</a>        
         <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav w-100 mr-auto">
-                <img class="d-block w-80 mx-auto" src="{{user.user.profile_picture.url}}" width="50"
-                    style="padding: 5px; border-radius: 50%">
-                <div style="display: inline">
-                    <p><a class="nav-link" href="../view_profile/">नमस्ते, <b><i>{{user.username}}</i></a></b>
+            <ul class="nav navbar-nav pull-right">
+                <li>
+                    <p><a class="nav-link" style='padding-left : 1122px' href="../view_profile/">नमस्ते,
+                            <b><i>{{user.username}}&nbsp;&nbsp;&nbsp;</i></a></b>
                     </p>
-                </div>
-
-                <li class="nav-item">
-                    <a class="btn" href="/logout/">Logout</a>
                 </li>
-
-            </ul>
-
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="/logout/">Logout <i class="fa fa-sign-out"
+                            style="font-size:18px"></i></a>
+                </li>
             </ul>
         </div>
     </nav>
-    <div class="main">
-        <div class="row justify-content-center">
-            <div class="container">
-                <h3>Review your profile, <i>{{user.username}}</i></h3>
-                <br><br>
-                <p><b>First Name:</b> {{ user.first_name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <b>Last Name:</b> {{ user.last_name }}
-                </p>
-                <p><b>Registered Email Address:</b> {{ user.email }}</p>
-                <p><b>Profile Picture</b></p>
-                <img src="{{user.user.profile_picture.url}}" width="240">
-            </div>
+
+    <div class="container d-flex justify-content-center" style="padding: 10px;">
+
+        <div class="text-center">
+            <img src="{{user.user.profile_picture.url}}" width="250" class="rounded-circle"
+                style=" box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <h3 class="mt-2">{{ user.first_name }} {{ user.last_name }}</h3>
+            <span class="mt-1 clearfix">{{ user.email }} <i class="fa fa-check-circle"
+                    style="font-size:15px;color:green"></i></span>
+
+            <!-- <span class="mt-1 clearfix">Add more here</span>  -->
+            <!-- <small class="mt-4">I am an android developer working at google Inc at california,USA</small> -->
         </div>
 
     </div>
