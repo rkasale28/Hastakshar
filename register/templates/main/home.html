@@ -15,96 +15,102 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <img class="d-block w-80 mx-auto" src="{%static 'images/logo.jpg'%}" width="50"
             style="padding: 5px; border-radius: 50%">
         <a class="navbar-brand" href="#">&nbsp;<b><i>HastAkshar</i></b></a>
-        <a class="navbar-brand" style='padding-left : 75px' href="#"><div id="clockbox"></div></a>
+        <a class="navbar-brand" style='padding-left : 75px' href="#">
+            <div id="clockbox"></div>
+        </a>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="nav navbar-nav pull-right">
                 {% if user.is_authenticated %}
                 <li>
-                    <p><a class="nav-link" style='padding-left : 700px;' href="view_profile/">नमस्ते,
+                    <p><a class="nav-link" style='margin-left: 700px;' href="view_profile/">नमस्ते,
                             <b><i>{{user.username}}&nbsp;&nbsp;&nbsp;</i></a></b>
                     </p>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-primary" href="/logout/" style="border-radius: 100px; margin-top: 5px;">Logout <i class="fa fa-sign-out"
-                            style="font-size:18px"></i></a>
+                    <a class="btn btn-outline-primary" href="/logout/" style="border-radius: 100px; margin-top: 5px;">Logout 
+                        <i class="fa fa-sign-out" style="font-size:18px"></i></a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <div class="main">
-        <div class="row justify-content-center">
-            <p>Hey, how have you been?!</p>            
-        </div> <!--class="row justify-content-center"-->
+    <div class="bg-dark" style="width: 100%;">
+        <br><br><br><br><br><br><br><br><br><br><br>
 
-        <div class="">
-            <a href="join/user-preferences">Start a Call</a>&nbsp; &nbsp; &nbsp;
-            <br>
-            <a href="#" data-toggle="modal" data-target="#myModal">Join a Call</a>
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Join a Call</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="text" id="room_code" placeholder="Enter Room Code">
-                            <button id="submit" class="btn btn-success" data-dismiss="modal"
-                                disabled>Join Call</button>
-                            <div>
-                                <ul class="text-danger messages">
-                                    <li id="roomcode-error-1" style="display: none;">Roomcode should be of length 32
-                                    </li>
-                                    <li id="roomcode-error-2" style="display: none;">Roomcode should not contain any
-                                        special characters
-                                    </li>
-                                </ul>
-                            </div>
+        <a class="btn btn-success" href="join/user-preferences" style='margin-left : 1150px; border-radius: 100px;'>Start a Call&nbsp;<i class="fa fa-phone" aria-hidden="true"></i></a>
+        <a class="btn btn-outline-success" href="#" data-toggle="modal" data-target="#myModal" style='margin-left : 10px; border-radius: 100px;'>Join a Call&nbsp;<i class="fa fa-gg" aria-hidden="true"></i></a>
+        <br><br>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Enter Room Code</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" id="room_code" autocomplete="off" class="form-control">
+                        <button id="submit" class="btn btn-success" data-dismiss="modal" disabled
+                            style="border-radius: 100px; margin-top: 5px; float: right;">Join Call</button>
+                        <div>
+                            <ul class="text-danger messages">
+                                <li id="roomcode-error-1" style="display: none;">Invalid Room Code!
+                                </li>
+                                <li id="roomcode-error-2" style="display: none;">Invalid Room Code!
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!-- class main -->
+    </div> <!-- Call Banner Ends -->
     <div>
-            <table class="table table-borderless">
-                <thead>
-                    <tr>
-                        <th scope="col" colspan="4"><h4>💡 Learn what we offer...</h4></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td><img src="{%static 'images/logo.jpg'%}" width="100" style="padding: 5px; border-radius: 50%"></td>
-                        <td><img src="{%static 'images/logo.jpg'%}" width="100" style="padding: 5px; border-radius: 50%"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <th>Video Calling Service</th>
-                        <th>ISL Interpretation Service</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Blah blah<br>Blah<br>Blah</td>
-                        <td>Blah blah<br>Blah<br>Blah</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-    
-        
+        <!-- Bottom Banner -->
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="5">
+                        <h4>💡 Learn what we offer...</h4>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><img src="{%static 'images/logo.jpg'%}" width="100" style="border-radius: 50%"></td>                    
+                    <td><img src="{%static 'images/logo.jpg'%}" width="100" style="border-radius: 50%"></td>                    
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <th>Video Calling Service</th>
+                    <th>ISL Interpretation Service</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Blah blah<br>Blah<br>Blah</td>
+                    <td>Blah blah<br>Blah<br>Blah</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+
     </div>
 
     <script type="text/javascript" src="{%static 'js/common.js'%}"></script>
@@ -113,8 +119,8 @@
     <script type="text/javascript" src="{%static 'validation/home.js'%}"></script>
 
     {% else %}
-            </ul>
-        </div>
+    </ul>
+    </div>
     </nav>
     <br>
     <p style="text-align:center; color: red">Login error! Kindly <a href="/login/">Login</a> first, to continue!
@@ -125,4 +131,5 @@
         <p>Made with &#128151 by <i>Team HastAkshar</i></p>
     </footer>
 </body>
+
 </html>
