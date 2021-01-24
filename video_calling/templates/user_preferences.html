@@ -10,7 +10,8 @@
     <script src="https://smtpjs.com/v3/smtp.js"> </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.min.js"></script>
 
     <link rel="stylesheet" href="{%static 'css/user_preferences.css'%}">
@@ -18,15 +19,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <img class="d-block w-80 mx-auto" src="{%static 'images/logo.jpg'%}" width="50"
             style="padding: 5px; border-radius: 50%">
-        <a class="navbar-brand" href="/">&nbsp;Home</a>
-        <a class="navbar-brand" style='padding-left : 131px' href="#"><div id="clockbox"></div></a>
+        <a class="navbar-brand" href="/">&nbsp;<b>Home</b></a>
+        <a class="navbar-brand" style='padding-left : 131px' href="#">
+            <div id="clockbox"></div>
+        </a>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="nav navbar-nav pull-right">
                 {% if user.is_authenticated %}
@@ -36,8 +39,8 @@
                     </p>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-primary" href="/logout/" style="border-radius: 100px; margin-top: 5px;">Logout <i class="fa fa-sign-out"
-                            style="font-size:18px"></i></a>
+                    <a class="btn btn-primary" href="/logout/" style="border-radius: 100px; margin-top: 5px;">Logout <i
+                            class="fa fa-sign-out" style="font-size:18px"></i></a>
                 </li>
             </ul>
         </div>
@@ -72,8 +75,8 @@
     <script type="text/javascript" src="{%static 'js/user_preferences.js'%}"></script>
     <script type="text/javascript" src="{%static 'js/time.js'%}"></script>
     {% else %}
-            </ul>
-        </div>
+    </ul>
+    </div>
     </nav>
     <br>
     <p style="text-align:center; color: red">Login error! Kindly <a href="/login/">Login</a> first, to continue!
@@ -84,4 +87,5 @@
         <p>Made with &#128151 by <i>Team HastAkshar</i></p>
     </footer>
 </body>
+
 </html>
