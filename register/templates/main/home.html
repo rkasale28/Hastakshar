@@ -24,12 +24,12 @@
             <ul class="nav navbar-nav pull-right">
                 {% if user.is_authenticated %}
                 <li>
-                    <p><a class="nav-link" style='padding-left : 700px' href="view_profile/">नमस्ते,
+                    <p><a class="nav-link" style='padding-left : 700px;' href="view_profile/">नमस्ते,
                             <b><i>{{user.username}}&nbsp;&nbsp;&nbsp;</i></a></b>
                     </p>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-primary" href="/logout/">Logout <i class="fa fa-sign-out"
+                    <a class="btn btn-primary" href="/logout/" style="border-radius: 100px; margin-top: 5px;">Logout <i class="fa fa-sign-out"
                             style="font-size:18px"></i></a>
                 </li>
             </ul>
