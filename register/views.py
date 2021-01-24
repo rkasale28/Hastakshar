@@ -125,6 +125,5 @@ def email(request):
 	# send_mail(subject, message, from_mail, to_mail, fail_silently=False)
 	# return HttpResponse("Done")
 
-# @login_required
 def view_profile(request):	
 	return render(request,'register/view_profile.html')
