@@ -26,7 +26,7 @@
             <ul class="nav navbar-nav pull-right">
                 {% if user.is_authenticated %}
                 <li>
-                    <p><a class="nav-link" style='margin-left: 700px;' href="view_profile/">नमस्ते,
+                    <p><a class="nav-link" style='margin-left: 690px;' href="view_profile/">नमस्ते,
                             <b><i>{{user.username}}&nbsp;&nbsp;&nbsp;</i></a></b>
                     </p>
                 </li>
@@ -39,16 +39,18 @@
         </div>
     </nav>
 
-    <div class="bg-dark" style="width: 100%;">
-        <br><br><br><br><br><br><br><br><br><br><br>
-
+    <div class="bg-dark" 
+    style="width: 100%; background-image: url('../static/images/banner.jpg');background-position: center; background-size: cover;">
+        <br><br><br><br>
+        <h4 style="color: white; margin-left:1152px; padding-bottom: 15px"><b>Join the Conversation</b></h4>
+        <br><br><br>
         <a class="btn btn-success" href="join/user-preferences"
             style='margin-left : 1150px; border-radius: 100px;'>Start a Call&nbsp;<i class="fa fa-phone"
                 aria-hidden="true"></i></a>
         <a class="btn btn-outline-success" href="#" data-toggle="modal" data-target="#myModal"
             style='margin-left : 10px; border-radius: 100px;'>Join a Call&nbsp;<i class="fa fa-gg"
-                aria-hidden="true"></i></a>
-        <br><br>
+                aria-hidden="true"></i></a>                
+        <br><br><br><br>
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
