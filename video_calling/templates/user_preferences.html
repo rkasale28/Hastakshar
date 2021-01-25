@@ -45,28 +45,25 @@
             </ul>
         </div>
     </nav>
-    <h2>Join the Conversation</h2>
-    <div id="myVideo" class="content">
-        <div class="overlay">
-            <img src="{{user.user.profile_picture.url}}">
-            <p>{{user.first_name}} {{user.last_name}}</p>
+    <br><br><br><br><br>
+    <div class="bg-light">
+        <br>
+        <div id="myVideo" class="content">
+            <div class="overlay">
+                <img src="{{user.user.profile_picture.url}}">
+                <p>{{user.first_name}} {{user.last_name}}</p>
+            </div>
         </div>
-    </div>
+        <br><br>
+        <h4><b>Join the Conversation</b></h4>
+        <br><br><br>
 
-    <div class="container">
-        <button id="audio">
-            Audio
-        </button>
-
-        <button id="video">
-            Video
-        </button>
-
+        <button id="audio" class="btn"><img src="{%static 'images/mic.png'%}" width="25" height="25"></i></button>
+        <button id="video" class="btn"><img src="{%static 'images/video.png'%}" width="25" height="25"></button>
         <input type="hidden" name="roomId" value="{{roomId}}" id="roomId">
-
-        <button id="join">
-            Join Room
-        </button>
+        <br><br><br><br>
+        <a id="join" class="btn btn-success">&nbsp;Join Call&nbsp;<i class="fa fa-gg" aria-hidden="true"></i></a>
+        <br><br><br><br>
     </div>
 
     <script type="text/javascript">
@@ -82,7 +79,6 @@
     <p style="text-align:center; color: red">Login error! Kindly <a href="/login/">Login</a> first, to continue!
     </p>
     {% endif %}
-
     <footer>
         <p>Made with &#128151 by <i>Team HastAkshar</i></p>
     </footer>
