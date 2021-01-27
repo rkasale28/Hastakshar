@@ -1,6 +1,6 @@
 .content {
-  margin-left: 300px;
-  position: fixed;
+  position: absolute;
+  left: 240px;
   width: 500px;
   height: 370px;
   padding: 20px;
@@ -36,21 +36,25 @@
 }
 
 h4 {
-  margin-left: 985px;
+  position: absolute;
+  right: 280px;
   padding-bottom: 15px;
 }
 
 #audio {
-  margin-left: 1025px;
+  position: absolute;
+  right: 430px;
   border-radius: 100px;
 }
 
 #video {
-  margin-left: 40px;
+  position: absolute;
+  right: 320px;
   border-radius: 100px;
 }
 
 #join {
-  margin-left: 1050px;
+  position: absolute;
+  right: 345px;
   border-radius: 100px;
 }

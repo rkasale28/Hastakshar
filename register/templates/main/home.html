@@ -13,9 +13,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
-
+{% if user.is_authenticated %}
 <body>
-    <nav class="navbar navbar-expand-sm navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <ul class="navbar-nav navbar-left">
                 <li><a>
@@ -25,30 +25,28 @@
                         style="margin-left: 10px;">&nbsp;<b><i>HastAkshar</i></b></a></li>
                 <li class="nav-item"><a class="navbar-brand" href="#" style="margin-left: 20px;">
                         <div id="clockbox"></div></a></li>
-            </ul>
-            {% if user.is_authenticated %}
+            </ul>            
             <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item"><a style="color: black; margin-right:20px;" href="view_profile/">नमस्ते,
+                <li class="nav-link"><a style="color: black; margin-right:20px;" href="view_profile/">नमस्ते,
                         <i><b>{{user.username}}</b></i></a></li>
                 <li class="nav-item"><a class="btn btn-outline-primary " style="border-radius: 100px;"
                         href="/logout/">Logout&nbsp;<i class="fa fa-sign-out" style="font-size:18px;"></i></a></li>
             </ul>
         </div>
-
     </nav>
-
+    <!-- Join the Conversation Banner-->
     <div class="bg-dark"
         style="width: 100%; background-image: url('../static/images/banner.jpg');background-position: center; background-size: cover;">
-        <br><br><br>
-        <h4 style="color: white; margin-left:1152px; padding-bottom: 20px"><b>Join the Conversation</b></h4>
         <br><br><br><br>
+        <h4 style="color: white; position:absolute; right:150px; padding-bottom: 20px"><b>Join the Conversation</b></h4>
+        <br><br><br><br><br>
         <a class="btn btn-success" href="join/user-preferences"
-            style='margin-left : 1150px; border-radius: 100px;'>Start a Call&nbsp;<i class="fa fa-phone"
+            style='position:absolute; right:278px; border-radius: 100px;'>Start a Call&nbsp;<i class="fa fa-phone"
                 aria-hidden="true"></i></a>
         <a class="btn btn-outline-success" href="#" data-toggle="modal" data-target="#myModal"
-            style='margin-left : 10px; border-radius: 100px;'>Join a Call&nbsp;<i class="fa fa-gg"
+            style='position:absolute; right:150px; border-radius: 100px;'>Join a Call&nbsp;<i class="fa fa-gg"
                 aria-hidden="true"></i></a>
-        <br><br><br><br>
+        <br><br><br><br><br>
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -77,8 +75,8 @@
             </div>
         </div>
     </div> <!-- Call Banner Ends -->
-    <div>
-        <!-- Bottom Banner -->
+
+    <div><!-- Learn what we offer Banner -->        
         <table class="table table-borderless">
             <thead>
                 <tr>
@@ -91,8 +89,8 @@
                 <tr>
                     <td></td>
                     <td></td>
-                    <td><img src="{%static 'images/vcs.png'%}" width="100" style="border-radius: 50%"></td>
-                    <td><i class="fa fa-american-sign-language-interpreting fa-5x" aria-hidden="true"></i></td>
+                    <td><img src="{%static 'images/vcs.png'%}" width="100" style="border-radius: 50%;"></td>
+                    <td><i class="fa fa-american-sign-language-interpreting fa-5x" style="color: #ffe39f;" aria-hidden="true"></i></td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -122,7 +120,18 @@
     <script type="text/javascript" src="{%static 'validation/home.js'%}"></script>
 
     {% else %}
-    </nav>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <ul class="navbar-nav navbar-left">
+                    <li><a>
+                            <img src="{%static 'images/logo.jpg'%}" width="40" style="border-radius: 50%">
+                        </a></li>
+                    <li class="nav-item"><a class="navbar-brand" href="/"
+                            style="margin-left: 10px;">&nbsp;<b><i>HastAkshar</i></b></a></li>                    
+                </ul>   
+             </div>
+        </nav>
     <br>
     <p style="text-align:center; color: red">Login error! Kindly <a href="/login/">Login</a> first, to continue!
     </p>

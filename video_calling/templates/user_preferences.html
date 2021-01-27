@@ -21,27 +21,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-
+{% if user.is_authenticated %}
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <img class="d-block w-80 mx-auto" src="{%static 'images/logo.jpg'%}" width="50"
-            style="padding: 5px; border-radius: 50%">
-        <a class="navbar-brand" href="/">&nbsp;<b>Home</b></a>
-        <a class="navbar-brand" style='padding-left : 131px' href="#">
-            <div id="clockbox"></div>
-        </a>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="nav navbar-nav pull-right">
-                {% if user.is_authenticated %}
-                <li>
-                    <p><a class="nav-link" style='margin-left: 690px;' href="../view_profile/">नमस्ते,
-                            <b><i>{{user.username}}&nbsp;&nbsp;&nbsp;</i></a></b>
-                    </p>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-primary" href="/logout/" style="border-radius: 100px; margin-top: 5px;">Logout <i
-                            class="fa fa-sign-out" style="font-size:18px"></i></a>
-                </li>
+        <div class="container-fluid">
+            <ul class="navbar-nav navbar-left">
+                <li><a>
+                        <img src="{%static 'images/logo.jpg'%}" width="40" style="border-radius: 50%">
+                    </a></li>
+                <li class="nav-item"><a class="navbar-brand" href="/"
+                        style="margin-left: 10px;">&nbsp;<b>Home</b></a></li>
+                <li class="nav-item"><a class="navbar-brand" href="#" style="margin-left: 73px;">
+                        <div id="clockbox"></div></a></li>
+            </ul>            
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-link"><a style="color: white; margin-right:20px;" href="/view_profile/">नमस्ते,
+                        <i><b>{{user.username}}</b></i></a></li>
+                <li class="nav-item"><a class="btn btn-outline-primary " style="border-radius: 100px;"
+                        href="/logout/">Logout&nbsp;<i class="fa fa-sign-out" style="font-size:18px;"></i></a></li>
             </ul>
         </div>
     </nav>
@@ -56,14 +53,14 @@
         </div>
         <br><br>
         <h4><b>Join the Conversation</b></h4>
-        <br><br><br>
+        <br><br><br><br>
 
         <button id="audio" class="btn"><img src="{%static 'images/mic.png'%}" width="25" height="25"></i></button>
         <button id="video" class="btn"><img src="{%static 'images/video.png'%}" width="25" height="25"></button>
         <input type="hidden" name="roomId" value="{{roomId}}" id="roomId">
         <br><br><br><br>
         <a id="join" class="btn btn-success">&nbsp;Join Call&nbsp;<i class="fa fa-gg" aria-hidden="true"></i></a>
-        <br><br><br><br>
+        <br><br><br><br><br><br>
     </div>
 
     <script type="text/javascript">
@@ -72,9 +69,19 @@
     <script type="text/javascript" src="{%static 'js/user_preferences.js'%}"></script>
     <script type="text/javascript" src="{%static 'js/time.js'%}"></script>
     {% else %}
-    </ul>
-    </div>
-    </nav>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <ul class="navbar-nav navbar-left">
+                    <li><a>
+                            <img src="{%static 'images/logo.jpg'%}" width="40" style="border-radius: 50%">
+                        </a></li>
+                    <li class="nav-item"><a class="navbar-brand" href="/"
+                            style="margin-left: 10px;">&nbsp;<b><i>HastAkshar</i></b></a></li>                    
+                </ul>
+   
+             </div>
+        </nav>
     <br>
     <p style="text-align:center; color: red">Login error! Kindly <a href="/login/">Login</a> first, to continue!
     </p>
