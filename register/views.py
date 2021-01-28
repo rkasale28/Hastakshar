@@ -126,4 +126,4 @@ def email(request):
 	# return HttpResponse("Done")
 
 def view_profile(request):	
-	return render(request,'register/view_profile.html')
+	return render(request,'main/view_profile.html')
