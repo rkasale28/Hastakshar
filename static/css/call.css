@@ -1,3 +1,9 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
 .content {
   width: 500px;
   height: 370px;
@@ -27,15 +33,14 @@
   padding: 5px;
 }
 
-/* Causes problems to model */
-.footer{
-    position: fixed; 
-    bottom:0px; 
-    display:flex;
-    align-items: center;
-    height: 90px;
-    width: 100%;
-    background-color: rgb(230, 230, 230);
+.footer {
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  height: 90px;
+  width: 100%;
+  background-color: rgb(230, 230, 230);
 }
 
 #add_user {
@@ -64,4 +69,35 @@
   left: 54%;
   bottom: 16px;
   border-radius: 100px;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  float: left;
+  width: 75%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+  background-color: #f1f1f1;
+  padding-left: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn,
+  .rightcolumn {
+    width: 100%;
+    padding: 0;
+  }
 }
