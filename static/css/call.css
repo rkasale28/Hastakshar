@@ -1,34 +1,34 @@
 .content {
-    width: 500px;
-    height: 370px;
-    padding: 20px;
+  width: 500px;
+  height: 370px;
+  padding: 20px;
 }
 
 .content video {
-    width: 100%;
-    height: 100%;
-    display: flex;
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 
-.content .overlay{
-    display: none;
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #D4CECD;
+.content .overlay {
+  display: none;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #d4cecd;
 }
 
 .content img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    padding: 5px;
-  }
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  padding: 5px;
+}
 
 /* Causes problems to model */
-/* #footer{
+.footer{
     position: fixed; 
     bottom:0px; 
     display:flex;
@@ -36,32 +36,32 @@
     height: 90px;
     width: 100%;
     background-color: rgb(230, 230, 230);
-} */
+}
 
 #add_user {
-    position: absolute;
-    left: 20px;
-    bottom: 16px;
-    border-radius: 100px;    
-  }
+  position: absolute;
+  left: 20px;
+  bottom: 16px;
+  border-radius: 100px;
+}
 
 #audio {
-    position: absolute;
-    left: 42%;
-    bottom: 16px;
-    border-radius: 100px;
-  }
+  position: absolute;
+  left: 42%;
+  bottom: 16px;
+  border-radius: 100px;
+}
 
 #leave_room {
-    position: absolute;
-    left: 48%;
-    bottom: 16px;
-    border-radius: 100px;
-  }
-  
+  position: absolute;
+  left: 48%;
+  bottom: 16px;
+  border-radius: 100px;
+}
+
 #video {
-    position: absolute;
-    left: 54%;
-    bottom: 16px;
-    border-radius: 100px;
-  }
+  position: absolute;
+  left: 54%;
+  bottom: 16px;
+  border-radius: 100px;
+}
