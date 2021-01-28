@@ -35,7 +35,7 @@ $(document).ready(function () {
         video: true,
         audio: true
     }).then(stream => {
-        myVideoStream = stream;
+        myVideoStream = stream;//outgoing user's video stream
 
         myVideoStream.getAudioTracks()[0].enabled = audio_enabled;
         $("#audio").html(audio_map.get(audio_enabled))
@@ -46,7 +46,7 @@ $(document).ready(function () {
         addVideoStream(myDiv, stream, video_enabled)
 
         myPeer.on('call', call => {
-            call.answer(stream)
+            call.answer(stream)//outgoing user's video stream
             socket.emit('initial_video', { 'video': ($.cookie("video_" + username) === "true") })
 
             const video = document.createElement('video')
@@ -54,7 +54,7 @@ $(document).ready(function () {
             video.id = call.peer
             div = createVideoElement(video)
 
-            // Recipient's video stream
+            // Recipient's incoming video stream
             call.on('stream', userVideoStream => {
                 if (!peers[call.peer]) {
                     addVideoStream(div, userVideoStream, reciever.video)
