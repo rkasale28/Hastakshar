@@ -1,5 +1,11 @@
-var audio_map = new Map([[true, "Mute"], [false, "Unmute"]])
-var video_map = new Map([[true, "Stop Video"], [false, "Start Video"]])
+var audio_map = new Map([
+    [true, `<img src="../static/images/mic.png" width="40" height="40">`],
+    [false, `<img src="../static/images/mic_mute.png" width="40" height="40">`],
+  ]);
+  var video_map = new Map([
+    [true, `<img src="../static/images/video.png" width="40" height="40">`],
+    [false, `<img src="../static/images/video-off.png" width="40" height="40">`],
+  ]);
 
 const peers = {}
 

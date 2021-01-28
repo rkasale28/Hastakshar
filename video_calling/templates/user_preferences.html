@@ -1,25 +1,23 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HastAkshar | Call Preferences</title>
-
+    <!-- scripts -->
     <script src="https://smtpjs.com/v3/smtp.js"> </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.min.js"></script>
-
+    <!-- links -->
     <link rel="stylesheet" href="{%static 'css/user_preferences.css'%}">
     <link rel="stylesheet" href="{%static 'css/styles.css'%}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 </head>
 {% if user.is_authenticated %}
 <body>
@@ -48,14 +46,13 @@
         <div id="myVideo" class="content">
             <div class="overlay">
                 <img src="{{user.user.profile_picture.url}}">
-                <p>{{user.first_name}} {{user.last_name}}</p>
+                <p><b>{{user.first_name}} {{user.last_name}}</b></p>
             </div>
         </div>
         <br><br>
         <h4><b>Join the Conversation</b></h4>
         <br><br><br><br>
-
-        <button id="audio" class="btn"><img src="{%static 'images/mic.png'%}" width="25" height="25"></i></button>
+        <button id="audio" class="btn"><img src="{%static 'images/mic.png'%}" width="25" height="25"></button>
         <button id="video" class="btn"><img src="{%static 'images/video.png'%}" width="25" height="25"></button>
         <input type="hidden" name="roomId" value="{{roomId}}" id="roomId">
         <br><br><br><br>
@@ -78,8 +75,7 @@
                         </a></li>
                     <li class="nav-item"><a class="navbar-brand" href="/"
                             style="margin-left: 10px;">&nbsp;<b><i>HastAkshar</i></b></a></li>                    
-                </ul>
-   
+                </ul>   
              </div>
         </nav>
     <br>
@@ -90,5 +86,4 @@
         <p>Made with &#128151 by <i>Team HastAkshar</i></p>
     </footer>
 </body>
-
 </html>
