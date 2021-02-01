@@ -22,7 +22,7 @@
 </head>
 {% if user.is_authenticated %}
 
-<body>
+<body class="bg-dark">
 
     <div class="row" style="margin-left: 10px; margin-right: 10px; margin-bottom: 91px; margin-top: 10px;">
         <div class="leftcolumn">
@@ -33,7 +33,7 @@
                 </div>
             <!-- </div> -->
         </div>
-        <div class="rightcolumn">
+        <div class="rightcolumn" >
             <!-- <div class="card"> -->
                 <h2 id="content"></h2>
                 <h2>Chat</h2>
@@ -49,18 +49,18 @@
         </div>
     </div>
 
-    <div class="footer">
+    <div class="footer bg-light">
         <div>
-            <button id="add_user" class="btn" data-toggle="modal" data-target="#myModal">
-                <img src="{%static 'images/add_user.png'%}" width="40" height="40">
+            <button id="add_user" class="btn btn-light" data-toggle="modal" data-target="#myModal">
+                <img src="{%static 'images/invite.png'%}" width="35" height="35">
             </button>
 
-            <button id="audio" class="btn"><img src="{%static 'images/mic.png'%}" width="40" height="40"></button>
+            <button id="audio" class="btn btn-light"><img src="{%static 'images/mic.png'%}" width="35" height="35"></button>
 
-            <button id="leave_room" class="btn btn-danger"><img src="{%static 'images/end_call.png'%}" width="40"
-                    height="40"></button>
+            <button id="leave_room" class="btn btn-danger"><img src="{%static 'images/end_call.png'%}" width="35"
+                    height="35"></button>
 
-            <button id="video" class="btn"><img src="{%static 'images/video.png'%}" width="40" height="40"></button>
+            <button id="video" class="btn btn-light"><img src="{%static 'images/video.png'%}" width="35" height="35"></button>
         </div>
     </div>
 
@@ -107,7 +107,7 @@
             <div class="container-fluid">
                 <ul class="navbar-nav navbar-left">
                     <li><a>
-                            <img src="{%static 'images/logo.jpg'%}" width="40" style="border-radius: 50%">
+                            <img src="{%static 'images/logo.jpg'%}" width="35" style="border-radius: 50%">
                         </a></li>
                     <li class="nav-item"><a class="navbar-brand" href="/"
                             style="margin-left: 10px;">&nbsp;<b><i>HastAkshar</i></b></a></li>

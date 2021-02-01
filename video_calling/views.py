@@ -21,6 +21,11 @@ thread = None
 
 numClients = {}
 
+#Remove this
+def call_test(request):
+    return render(request,'call_test.html')
+#
+
 def index(request):
     global thread
     if thread is None:
@@ -136,9 +141,6 @@ def join_room(sid,message):
     @sio.event
     def toggle_video(sid, data):
         sio.emit('change_status', data=data,room=data['roomId'],skip_sid=sid)
-
-
-
 
 
 
