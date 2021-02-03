@@ -117,15 +117,15 @@ def join_room(sid,message):
     def disconnect(sid):
         print ('User disconnected')
                     
-        sio.leave_room(sid,roomId)
+        # sio.leave_room(sid,roomId)
 
-        if (roomId in numClients.keys()):
-            if (userId in numClients[roomId]):
-                numClients[roomId].remove(userId)
-            if (len(numClients[roomId]) == 0):
-                del numClients[roomId]
+        # if (roomId in numClients.keys()):
+        #     if (userId in numClients[roomId]):
+        #         numClients[roomId].remove(userId)
+        #     if (len(numClients[roomId]) == 0):
+        #         del numClients[roomId]
 
-        sio.emit('user-left', room=roomId)
+        # sio.emit('user-left', room=roomId)
         sio.emit('user-disconnected', data={'userId':userId},room=roomId)
         
     @sio.event
