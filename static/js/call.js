@@ -32,7 +32,6 @@ $(document).ready(function () {
     let myVideoStream
 
     const myVideo = document.createElement("video");
-    myVideo.classList.add("sender")
     myVideo.muted = true;
     myVideo.id = "sender"
     myDiv = createVideoElement(myVideo)
@@ -56,9 +55,9 @@ $(document).ready(function () {
             socket.emit('initial_video', { 'video': ($.cookie("video_" + username) === "true") })
 
             const video = document.createElement('video')
-            video.classList.add("recipient")
             video.id = call.peer
             div = createVideoElement(video)
+            div.classList.add("recipient")
 
             // Recipient's incoming video stream
             call.on('stream', userVideoStream => {
@@ -76,13 +75,13 @@ $(document).ready(function () {
         $('#chat_message').keydown(function (e) {
             if (e.which == 13 && text.val().length !== 0) {
                 socket.emit('message', { "message": text.val(), "room": roomId });
-                $("#messages").append(`<li class="message"><b>sent</b><br/>${text.val()}</li>`);
+                $("#messages").append(`<div class="sent_msg">${text.val()}</div>`);
                 text.val('')
             }
         });
 
         socket.on('createMessage', function (dict) {
-            $("#messages").append(`<li class="message"><b>recieved</b><br/>${dict.message}</li>`);
+            $("#messages").append(`<div class="text-left ml-2 recieved_msg">${dict.message}</div>`);
         })
 
         socket.on('redirect', function (data) {
@@ -184,9 +183,9 @@ const connectToNewUser = function (userId, stream) {
     socket.emit('initial_video', { 'video': ($.cookie("video_" + username) === "true") })
 
     const video = document.createElement('video')
-    video.classList.add("recipient")
     video.id = call.peer
     div = createVideoElement(video)
+    div.classList.add("recipient")
 
     // Recipient's Video Stream
     call.on('stream', userVideoStream => {
@@ -221,12 +220,10 @@ const createVideoElement = function (video) {
             myDiv_child.classList.add("overlay")
             myDiv_child.innerHTML =
                 `<img src="${src}">\
-                <h2>${content}</h2>`
+                <h6>${content}</h6>`
 
             myDiv_parent.append(myDiv_child)
             myDiv_parent.append(video)
-
-            myDiv_parent.classList.add(video.classList.item(0))
         }
     });
     return myDiv_parent
@@ -257,6 +254,10 @@ const addVideoStream = function (div, stream, status = null) {
             }
         }
 
-        $('#video-grid').append(div)
+        if (div.id == "sender"){
+            $('#sender-video').append(div)
+        }else{
+            $('#reciever-video').append(div) 
+        }
     }
 }    

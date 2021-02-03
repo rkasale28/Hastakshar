@@ -1,15 +1,8 @@
-.container {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-}
-/* .sender and .receiver */
 .content {
-  width: 500px;
-  height: 370px;
-  padding: 20px;
+  width: 100%;
+  height: 100%;
 }
-/* .sender */
+
 .content video {
   width: 100%;
   height: 100%;
@@ -27,8 +20,7 @@
 }
 
 .content img {
-  width: 200px;
-  height: 200px;
+  width: 30%;
   border-radius: 50%;
   padding: 5px;
 }
@@ -70,33 +62,45 @@
   border-radius: 100px;
 }
 
-/* Create two unequal columns that floats next to each other */
-/* Left column */
-.leftcolumn {
-  float: left;
-  width: 80%;
+#sender-video{
+  width: 100%;
+  height: 30%;
 }
 
-/* Right column */
-.rightcolumn {
-  float: left;
-  width: 20%;
-  background-color: #f1f1f1;
-  padding-left: 20px;
+#reciever-video{
+  width: 90%;
+  height: 90%;
+  margin: 5%;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+body{
+  height: 100vh
 }
 
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 800px) {
-  .leftcolumn,
-  .rightcolumn {
-    width: 100%;
-    padding: 0;
-  }
+.sent_msg{
+  background-color: #8591EC;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: right;
+  padding: 10px;
+  margin-top: 10px;
+  margin-right: 5px;
+  max-width: 60%;
+  align-self: flex-end;
+  overflow-wrap: break-word;
+}
+
+.recieved_msg{
+  background-color: #9A7EBB;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  text-align: left;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 5px;
+  max-width: 60%;
+  align-self: flex-start;
+  overflow-wrap: break-word;
 }

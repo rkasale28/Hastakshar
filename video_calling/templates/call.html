@@ -23,44 +23,45 @@
 {% if user.is_authenticated %}
 
 <body class="bg-dark">
+    <div class='d-flex' style="height:86vh;">
+        <div class="d-flex w-75">
+            <div id="reciever-video">
 
-    <div class="row" style="margin-left: 10px; margin-right: 10px; margin-bottom: 91px; margin-top: 10px;">
-        <div class="leftcolumn">
-            <!-- <div class="card"> -->
-                <h2>Video</h2>
-                <div id="video-grid" class="container">
-
-                </div>
-            <!-- </div> -->
+            </div>
         </div>
-        <div class="rightcolumn" >
-            <!-- <div class="card"> -->
-                <h2 id="content"></h2>
-                <h2>Chat</h2>
-                <div id="chat_section">
-                    <ul id="messages">
 
-                    </ul>
+        <div class="d-flex w-25 flex-column flex-grow-1 bg-light">            
+            <div id="sender-video" class="bg-dark"></div>
+            
+            <div id="chat_section" class='flex-grow-1' style="overflow-y: scroll; overflow-x:hidden">
+                <div id="messages" class="d-flex flex-column">
+
                 </div>
-                <div id="chat_input" style="padding: 5px;">
-                    <input id="chat_message" type="text" placeholder="Type message here..." class="form-control">
-                </div>
-            <!-- </div> -->
+            </div>
+
+            <div id="chat_input" style="padding: 5px;">
+                <input id="chat_message" type="text" placeholder="Type message here..." class="form-control">
+            </div>
+
         </div>
-    </div>
+        
+        <div class="footer bg-light">
+            <div>
+                <button id="add_user" class="btn btn-light" data-toggle="modal" data-target="#myModal">
+                    <img src="{%static 'images/invite.png'%}" width="35" height="35">
+                </button>
 
-    <div class="footer bg-light">
-        <div>
-            <button id="add_user" class="btn btn-light" data-toggle="modal" data-target="#myModal">
-                <img src="{%static 'images/invite.png'%}" width="35" height="35">
-            </button>
+                <button id="audio" class="btn btn-light"><img src="{%static 'images/mic.png'%}" width="35"
+                        height="35"></button>
 
-            <button id="audio" class="btn btn-light"><img src="{%static 'images/mic.png'%}" width="35" height="35"></button>
+                <button id="leave_room" class="btn btn-danger"><img src="{%static 'images/end_call.png'%}" width="35"
+                        height="35"></button>
 
-            <button id="leave_room" class="btn btn-danger"><img src="{%static 'images/end_call.png'%}" width="35"
-                    height="35"></button>
-
-            <button id="video" class="btn btn-light"><img src="{%static 'images/video.png'%}" width="35" height="35"></button>
+                <button id="video" class="btn btn-light"><img src="{%static 'images/video.png'%}" width="35"
+                        height="35"></button>             
+                        
+                
+            </div>
         </div>
     </div>
 
@@ -89,6 +90,7 @@
         </div>
     </div>
     <!-- Model Ended-->
+
     <script>
         var user_id = "{{user.user.secondary_id}}"
         var username = "{{user.username}}"
