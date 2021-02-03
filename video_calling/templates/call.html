@@ -50,14 +50,21 @@
                 <div id="sender-video" class="bg-dark"></div>
 
                 <div id="chat_section" class='flex-grow-1' style="overflow-y: scroll; overflow-x:hidden">
+                    <h4 style="text-align: center; padding:5px">Chat</h4>
                     <div id="messages" class="d-flex flex-column">
 
                     </div>
                 </div>
 
                 <div id="chat_input" style="padding: 5px;">
+                    
                     <input id="chat_message" type="text" placeholder="Type message here..." class="form-control">
+                    <!-- <button id="send_msg" class="btn btn-light" >
+                        <img src="{%static 'images/send.png'%}" width="25" height="25">
+                    </button> -->
+
                 </div>
+            
 
             </div>
 
@@ -122,14 +129,14 @@
     {% else %}
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
             <div class="container-fluid">
                 <ul class="navbar-nav navbar-left">
                     <li><a>
                             <img src="{%static 'images/logo.jpg'%}" width="35" style="border-radius: 50%">
                         </a></li>
                     <li class="nav-item"><a class="navbar-brand" href="/"
-                            style="margin-left: 10px;">&nbsp;<b><i>HastAkshar</i></b></a></li>
+                            style="margin-left: 10px; color:white;">&nbsp;<b><i>HastAkshar</i></b></a></li>
                 </ul>
             </div>
         </nav>

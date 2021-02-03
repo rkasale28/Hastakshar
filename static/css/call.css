@@ -3,20 +3,29 @@
   height: 100%;
 }
 
+body {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 .content video {
-  width: 100%;
   height: 100%;
-  display: flex;
+  width: 100%;
+  /* object-fit: fill; */
+  display: block;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
 }
 
 .content .overlay {
   display: none;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #d4cecd;
+  color: white;
+  background-color: #000000;
 }
 
 .content img {
@@ -25,13 +34,49 @@
   padding: 5px;
 }
 
-.footer {
-  position: fixed;
-  bottom: 0px;
-  display: flex;
-  align-items: center;
-  height: 10vh;
+#sender-video {
   width: 100%;
+  min-height: 41%;
+}
+
+#reciever-video {
+  width: 71%;
+  margin-top: auto;
+  margin-left: auto;
+  margin-bottom: auto;
+  margin-right: auto;
+}
+
+#reciever-video .content .overlay {
+  height: 600px;
+}
+
+.sent_msg {
+  background-color: #188efd;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: right;
+  padding: 10px;
+  margin-top: 10px;
+  margin-right: 5px;
+  max-width: 60%;
+  align-self: flex-end;
+  overflow-wrap: break-word;
+}
+
+.recieved_msg {
+  background-color: #e5e5ea;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  text-align: left;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 5px;
+  max-width: 60%;
+  align-self: flex-start;
+  overflow-wrap: break-word;
 }
 
 #add_user {
@@ -62,45 +107,11 @@
   border-radius: 100px;
 }
 
-#sender-video{
+.footer {
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  height: 10vh;
   width: 100%;
-  height: 30%;
-}
-
-#reciever-video{
-  width: 90%;
-  height: 90%;
-  margin: 5%;
-}
-
-body{
-  height: 100vh
-}
-
-.sent_msg{
-  background-color: #8591EC;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  text-align: right;
-  padding: 10px;
-  margin-top: 10px;
-  margin-right: 5px;
-  max-width: 60%;
-  align-self: flex-end;
-  overflow-wrap: break-word;
-}
-
-.recieved_msg{
-  background-color: #9A7EBB;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  text-align: left;
-  padding: 10px;
-  margin-top: 10px;
-  margin-left: 5px;
-  max-width: 60%;
-  align-self: flex-start;
-  overflow-wrap: break-word;
 }

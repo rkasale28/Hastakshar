@@ -76,12 +76,14 @@ $(document).ready(function () {
             if (e.which == 13 && text.val().length !== 0) {
                 socket.emit('message', { "message": text.val(), "room": roomId });
                 $("#messages").append(`<div class="sent_msg">${text.val()}</div>`);
+                scrolltoBottom();
                 text.val('')
             }
         });
 
         socket.on('createMessage', function (dict) {
             $("#messages").append(`<div class="text-left ml-2 recieved_msg">${dict.message}</div>`);
+            scrolltoBottom();
         })
 
         socket.on('redirect', function (data) {
@@ -174,6 +176,12 @@ $(document).ready(function () {
         socket.emit('leave', { roomId: roomId });
     }  
 })
+
+const scrolltoBottom = () => {
+    var d = $('#chat_section');
+    console.log(d);
+    d.scrollTop(d.prop("scrollHeight"));
+  }
 
 const connectToNewUser = function (userId, stream) {
     console.log('new user')
