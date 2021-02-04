@@ -50,7 +50,7 @@ pygame==1.9.6
 pyparsing==2.4.7
 python-dateutil==2.8.1
 python-engineio==4.0.0
-python-rapidjson @ file:///C:/Users/Dhairya/Downloads/python_rapidjson-1.0-cp37-cp37m-win_amd64.whl
+python-rapidjson==1.0
 python-socketio==5.0.4
 pytz==2020.5
 PyYAML==5.3.1
