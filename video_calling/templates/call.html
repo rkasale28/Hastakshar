@@ -113,7 +113,11 @@
         var username = "{{user.username}}"
         var full_name = "{{user.first_name}}" + " " + "{{user.last_name}}"
 
-        var myPeer = new Peer(id = user_id)
+        var myPeer = new Peer(id = user_id, {
+            secure: true, 
+            host: 'hastakshar.herokuapp.com', 
+            port: 443,
+        })
     </script>
     <script type="text/javascript" src="{%static 'js/common.js'%}"></script>
     <script type="text/javascript" src="{%static 'js/call.js'%}"></script>
