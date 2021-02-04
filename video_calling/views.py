@@ -115,19 +115,8 @@ def join_room(sid,message):
 
     @sio.event
     def disconnect(sid):
-        print ('User disconnected')
-                    
-        # sio.leave_room(sid,roomId)
-
-        # if (roomId in numClients.keys()):
-        #     if (userId in numClients[roomId]):
-        #         numClients[roomId].remove(userId)
-        #     if (len(numClients[roomId]) == 0):
-        #         del numClients[roomId]
-
-        # sio.emit('user-left', room=roomId)
         sio.emit('user-disconnected', data={'userId':userId},room=roomId)
-        
+
     @sio.event
     def leave(sid,message):
         roomId = message['roomId']
@@ -152,6 +141,9 @@ def join_room(sid,message):
     @sio.event
     def toggle_video(sid, data):
         sio.emit('change_status', data=data,room=data['roomId'],skip_sid=sid)
+
+
+
 
 
 
