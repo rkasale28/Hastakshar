@@ -32,12 +32,6 @@
                             <li><a>
                                     <img src="{%static 'images/logo.jpg'%}" width="40" style="border-radius: 50%">
                                 </a></li>
-                            <li class="nav-item"><a class="navbar-brand"
-                                    style="margin-left: 10px;">&nbsp;<b><i>HastAkshar</i></b></a></li>
-                            <li class="nav-item"><a class="navbar-brand" href="#"
-                                    style="margin-left: 20px; color:white;">
-                                    <div id="clockbox"></div>
-                                </a></li>
                         </ul>
                     </div>
                 </nav>
@@ -57,14 +51,14 @@
                 </div>
 
                 <div id="chat_input" style="padding: 5px;">
-                    
+
                     <input id="chat_message" type="text" placeholder="Type message here..." class="form-control">
                     <!-- <button id="send_msg" class="btn btn-light" >
                         <img src="{%static 'images/send.png'%}" width="25" height="25">
                     </button> -->
 
                 </div>
-            
+
 
             </div>
 
@@ -73,17 +67,17 @@
         <div class="footer bg-light">
             <div>
                 <button id="add_user" class="btn btn-light" data-toggle="modal" data-target="#myModal">
-                    <img src="{%static 'images/invite.png'%}" width="35" height="35">
+                    <img src="{%static 'images/invite.png'%}" width="45%" height="45%">
                 </button>
 
-                <button id="audio" class="btn btn-light"><img src="{%static 'images/mic.png'%}" width="35"
-                        height="35"></button>
+                <button id="audio" class="btn btn-light"><img src="{%static 'images/mic.png'%}" width="45%"
+                        height="45%"></button>
 
-                <button id="leave_room" class="btn btn-danger"><img src="{%static 'images/end_call.png'%}" width="35"
-                        height="35"></button>
+                <button id="leave_room" class="btn btn-danger"><img src="{%static 'images/end_call.png'%}" width="45%"
+                        height="45%"></button>
 
-                <button id="video" class="btn btn-light"><img src="{%static 'images/video.png'%}" width="35"
-                        height="35"></button>
+                <button id="video" class="btn btn-light"><img src="{%static 'images/video.png'%}" width="45%"
+                        height="45%"></button>
             </div>
         </div>
     </div>
@@ -123,7 +117,6 @@
     </script>
     <script type="text/javascript" src="{%static 'js/common.js'%}"></script>
     <script type="text/javascript" src="{%static 'js/call.js'%}"></script>
-    <script type="text/javascript" src="{%static 'js/time.js'%}"></script>
     <script type="text/javascript" src="{%static 'validation/call.js'%}"></script>
 
     {% else %}

@@ -1,10 +1,10 @@
 var audio_map = new Map([
-  [true, `<img src="../static/images/mic.png" width="35" height="35">`],
-  [false, `<img src="../static/images/mic_mute.png" width="35" height="35">`],
+  [true, `<img src="../static/images/mic.png" width="45%" height="45%">`],
+  [false, `<img src="../static/images/mic_mute.png" width="45%" height="45%">`],
 ]);
 var video_map = new Map([
-  [true, `<img src="../static/images/video.png" width="35" height="35">`],
-  [false, `<img src="../static/images/video-off.png" width="35" height="35">`],
+  [true, `<img src="../static/images/video.png" width="45%" height="45%">`],
+  [false, `<img src="../static/images/video-off.png" width="45%" height="45%">`],
 ]);
 const peers = {};
 
@@ -187,7 +187,6 @@ $(document).ready(function () {
 });
 const scrolltoBottom = () => {
   var d = $("#chat_section");
-  console.log(d);
   d.scrollTop(d.prop("scrollHeight"));
 };
 const connectToNewUser = function (userId, stream) {
@@ -237,7 +236,7 @@ const createVideoElement = function (video) {
       const myDiv_child = document.createElement("div");
       myDiv_child.classList.add("overlay");
       myDiv_child.innerHTML = `<img src="${src}">\
-                <h2>${content}</h2>`;
+                <h6>${content}</h6>`;
 
       myDiv_parent.append(myDiv_child);
       myDiv_parent.append(video);

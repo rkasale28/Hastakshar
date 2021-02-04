@@ -81,14 +81,14 @@ body {
 
 #add_user {
   position: absolute;
-  left: 20px;
+  /* left: 20px; */
   bottom: 16px;
   border-radius: 100px;
 }
 
 #audio {
   position: absolute;
-  left: 42%;
+  left: 40%;
   bottom: 16px;
   border-radius: 100px;
 }
@@ -102,7 +102,7 @@ body {
 
 #video {
   position: absolute;
-  left: 54%;
+  left: 56%;
   bottom: 16px;
   border-radius: 100px;
 }
