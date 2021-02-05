@@ -122,8 +122,9 @@
         }        
 
         var myPeer = new Peer(id = user_id, {
+            secure: true,
             host: 'hastakshar.herokuapp.com', 
-            port: 9000,
+            port: 443,
             path: '/join/call?roomId='+roomId,
         })
     </script>
