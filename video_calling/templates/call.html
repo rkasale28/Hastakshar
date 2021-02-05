@@ -113,10 +113,18 @@
         var username = "{{user.username}}"
         var full_name = "{{user.first_name}}" + " " + "{{user.last_name}}"
 
+        let searchParams = new URLSearchParams(window.location.search);
+        let roomId = searchParams.get("roomId");
+
+        if (roomId == null) {
+            alert("Access Prohibited");
+            window.location.href = "/";
+        }        
+
         var myPeer = new Peer(id = user_id, {
-            secure: true, 
             host: 'hastakshar.herokuapp.com', 
-            port: 443,
+            port: 9000,
+            path: '/join/call?roomId='+roomId,
         })
     </script>
     <script type="text/javascript" src="{%static 'js/common.js'%}"></script>

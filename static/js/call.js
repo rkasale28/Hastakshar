@@ -16,13 +16,6 @@ var video_enabled = $.cookie("video_" + username) === "true";
 let sender, reciever;
 
 $(document).ready(function () {
-  let searchParams = new URLSearchParams(window.location.search);
-  let roomId = searchParams.get("roomId");
-
-  if (roomId == null) {
-    alert("Access Prohibited");
-    window.location.href = "/";
-  }
 
   if (
     typeof $.cookie("audio_" + username) === "undefined" ||
