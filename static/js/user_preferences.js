@@ -1,5 +1,6 @@
 $(document).ready(function () {
-  const socket = io('ws://hastakshar.herokuapp.com/');
+  var origin = window.location.origin;
+  const socket = io.connect(origin);
 
   let myVideoStream;
 
