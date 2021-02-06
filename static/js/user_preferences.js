@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const socket = io('wss://hastakshar.herokuapp.com');
+  const socket = io('/');
 
   let myVideoStream;
 

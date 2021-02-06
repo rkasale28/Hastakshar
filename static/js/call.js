@@ -8,7 +8,7 @@ var video_map = new Map([
 ]);
 const peers = {};
 
-const socket = io('wss://hastakshar.herokuapp.com');
+const socket = io('/');
 
 var audio_enabled = $.cookie("audio_" + username) === "true";
 var video_enabled = $.cookie("video_" + username) === "true";
