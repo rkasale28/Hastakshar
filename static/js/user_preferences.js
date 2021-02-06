@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var socket = io.connect();
+  var socket = io('/');
 
   let myVideoStream;
 
