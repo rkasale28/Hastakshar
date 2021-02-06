@@ -121,12 +121,7 @@
             window.location.href = "/";
         }        
 
-        var myPeer = new Peer(id = user_id, {
-            secure: true,
-            host: 'hastakshar.herokuapp.com', 
-            port: 443,
-            path: '/join/call?roomId='+roomId,
-        })
+        var myPeer = new Peer(id = user_id)
     </script>
     <script type="text/javascript" src="{%static 'js/common.js'%}"></script>
     <script type="text/javascript" src="{%static 'js/call.js'%}"></script>
