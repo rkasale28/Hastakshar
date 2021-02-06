@@ -1,6 +1,5 @@
 $(document).ready(function () {
-  var host = window.location.hostname; 
-  var socket = io.connect('https://' + host);
+  const socket = io('/');
 
   let myVideoStream;
 
