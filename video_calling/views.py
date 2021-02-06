@@ -16,7 +16,7 @@ from rapidjson import dumps, UM_HEX
 import socketio
 
 basedir = os.path.dirname(os.path.realpath(__file__))
-sio = socketio.Server(async_mode=async_mode, logger=True, engineio_logger=True)
+sio = socketio.Server(async_mode=async_mode, logger=True, engineio_logger=True, cors_allowed_origins=['http://localhost:8000'])
 thread = None
 
 numClients = {}

@@ -4,7 +4,7 @@ from video_calling.views import sio
 import os
 
 port = int(os.environ.get("PORT", 8000))
-host = '0.0.0.0'
+host = ''
 
 class Command(RunCommand):
     help = 'Run the Socket.IO server'
