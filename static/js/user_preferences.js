@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const socket = io.connect(window.location.protocol + '//' + document.domain + ':' + location.port);
+  const socket = io.connect('/');
   console.log(socket)
 
   let myVideoStream;

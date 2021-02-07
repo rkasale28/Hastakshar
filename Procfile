@@ -1,1 +1,1 @@
-web: gunicorn -k eventlet -w 1 miniproject.wsgi:application
+web: gunicorn miniproject.wsgi --log-file -
