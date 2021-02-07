@@ -4,7 +4,10 @@ var audio_map = new Map([
 ]);
 var video_map = new Map([
   [true, `<img src="../static/images/video.png" width="45%" height="45%">`],
-  [false, `<img src="../static/images/video-off.png" width="45%" height="45%">`],
+  [
+    false,
+    `<img src="../static/images/video-off.png" width="45%" height="45%">`,
+  ],
 ]);
 const peers = {};
 
@@ -18,7 +21,6 @@ var video_enabled = $.cookie("video_" + username) === "true";
 let sender, reciever;
 
 $(document).ready(function () {
-
   if (
     typeof $.cookie("audio_" + username) === "undefined" ||
     typeof $.cookie("video_" + username) === "undefined"
