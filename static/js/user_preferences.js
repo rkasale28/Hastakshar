@@ -1,7 +1,5 @@
 $(document).ready(function () {
-  var socket = io.connect(
-    window.location.protocol + "//" + document.domain + ":" + location.port
-  );
+  const socket = io.connect('/');
 
   let myVideoStream;
 
@@ -14,10 +12,7 @@ $(document).ready(function () {
   ]);
   var video_map = new Map([
     [true, `<img src="../static/images/video.png" width="25" height="25">`],
-    [
-      false,
-      `<img src="../static/images/video-off.png" width="25" height="25">`,
-    ],
+    [false, `<img src="../static/images/video-off.png" width="25" height="25">`],
   ]);
 
   navigator.mediaDevices

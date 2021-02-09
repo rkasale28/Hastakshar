@@ -135,12 +135,16 @@ def join_room(sid,message):
         sio.emit('redirect',{'url':url}, to=sid)
 
     @sio.event
-    def initial_video(sid, data):
+    def initial_status(sid, data):
         sio.emit('detect-status', data=data,room=roomId,skip_sid=sid)
-
+    
     @sio.event
     def toggle_video(sid, data):
-        sio.emit('change_status', data=data,room=data['roomId'],skip_sid=sid)
+        sio.emit('change_video_status', data=data,room=data['roomId'],skip_sid=sid)
+    
+    @sio.event
+    def toggle_audio(sid, data):
+        sio.emit('change_audio_status', data=data,room=data['roomId'],skip_sid=sid)
 
 
 

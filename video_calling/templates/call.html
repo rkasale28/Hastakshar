@@ -16,7 +16,7 @@
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="https://cdn.socket.io/3.1.1/socket.io.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script type="text/javascript" src="{%static 'js/peer.js'%}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
@@ -43,27 +43,28 @@
             <div class="d-flex w-25 flex-column flex-grow-1 bg-light">
                 <div id="sender-video" class="bg-dark"></div>
 
-                <div id="chat_section" class='flex-grow-1' style="overflow-y: scroll; overflow-x:hidden">
-                    <h4 style="text-align: center; padding:5px">Chat</h4>
+                <div id="chat_section" class='flex-grow-1' style="overflow-y: auto; overflow-x:hidden">
+                    <div id="intro" class="d-flex align-items-center text-center justify-content-center" style="min-height: 100%;">
+                        <h5 class="text-muted font-italic">Chats will appear here
+                        </h5>
+                    </div>
+
                     <div id="messages" class="d-flex flex-column">
 
                     </div>
                 </div>
 
-                <div id="chat_input" style="padding: 5px;">
-
+                <div id="chat_input" style="padding: 5px;" class="input-group">
                     <input id="chat_message" type="text" placeholder="Type message here..." class="form-control">
-                    <!-- <button id="send_msg" class="btn btn-light" >
-                        <img src="{%static 'images/send.png'%}" width="25" height="25">
-                    </button> -->
-
+                    <div class="input-group-append">
+                        <button id="send_msg" class="btn btn-light">
+                            <img src="{%static 'images/send.png'%}" height="20">
+                        </button>
+                    </div>
                 </div>
-
-
             </div>
-
-
         </div>
+
         <div class="footer bg-light">
             <div>
                 <button id="add_user" class="btn btn-light" data-toggle="modal" data-target="#myModal">
@@ -119,9 +120,11 @@
         if (roomId == null) {
             alert("Access Prohibited");
             window.location.href = "/";
-        }        
+        }
 
         var myPeer = new Peer(id = user_id)
+
+        var mic_url = "{% static 'images/mic_mute.png' %}" 
     </script>
     <script type="text/javascript" src="{%static 'js/common.js'%}"></script>
     <script type="text/javascript" src="{%static 'js/call.js'%}"></script>

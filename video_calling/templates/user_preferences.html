@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Amiko' rel='stylesheet'>
+    
 </head>
 {% if user.is_authenticated %}
 <body>
@@ -44,9 +46,9 @@
     <div class="bg-light">
         <br>
         <div id="myVideo" class="content">
-            <div class="overlay">
+            <div class="overlay m-auto">
                 <img src="{{user.user.profile_picture.url}}">
-                <p><b>{{user.first_name}} {{user.last_name}}</b></p>
+                <p>{{user.first_name}} {{user.last_name}}</p>
             </div>
         </div>
         <br><br>

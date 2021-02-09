@@ -4,16 +4,11 @@ var audio_map = new Map([
 ]);
 var video_map = new Map([
   [true, `<img src="../static/images/video.png" width="45%" height="45%">`],
-  [
-    false,
-    `<img src="../static/images/video-off.png" width="45%" height="45%">`,
-  ],
+  [false, `<img src="../static/images/video-off.png" width="45%" height="45%">`],
 ]);
 const peers = {};
 
-var socket = io.connect(
-  window.location.protocol + "//" + document.domain + ":" + location.port
-);
+const socket = io('/');
 
 var audio_enabled = $.cookie("audio_" + username) === "true";
 var video_enabled = $.cookie("video_" + username) === "true";
@@ -21,6 +16,7 @@ var video_enabled = $.cookie("video_" + username) === "true";
 let sender, reciever;
 
 $(document).ready(function () {
+
   if (
     typeof $.cookie("audio_" + username) === "undefined" ||
     typeof $.cookie("video_" + username) === "undefined"
@@ -50,12 +46,13 @@ $(document).ready(function () {
       myVideoStream.getVideoTracks()[0].enabled = video_enabled;
       $("#video").html(video_map.get(video_enabled));
 
-      addVideoStream(myDiv, stream, video_enabled);
+      addVideoStream(myDiv, stream, video_enabled, audio_enabled);
 
       myPeer.on("call", (call) => {
         call.answer(stream);
-        socket.emit("initial_video", {
+        socket.emit("initial_status", {
           video: $.cookie("video_" + username) === "true",
+          audio: $.cookie("audio_" + username) === "true"
         });
 
         const video = document.createElement("video");
@@ -67,7 +64,7 @@ $(document).ready(function () {
         // Recipient's video stream
         call.on("stream", (userVideoStream) => {
           if (!peers[call.peer]) {
-            addVideoStream(div, userVideoStream, reciever.video);
+            addVideoStream(div, userVideoStream, reciever.video, reciever.audio);
           }
         });
       });
@@ -78,7 +75,10 @@ $(document).ready(function () {
 
       let text = $("#chat_message");
       $("#chat_message").keydown(function (e) {
-        if (e.which == 13 && text.val().length !== 0) {
+        if (e.which == 13 && text.val().length !== 0) {          
+          $("#intro").removeClass("d-flex");
+          $("#intro").addClass("d-none");
+          
           socket.emit("message", { message: text.val(), room: roomId });
           $("#messages").append(`<div class="sent_msg">${text.val()}</div>`);
           scrolltoBottom();
@@ -87,6 +87,9 @@ $(document).ready(function () {
       });
 
       socket.on("createMessage", function (dict) {
+        $("#intro").removeClass("d-flex");
+        $("#intro").addClass("d-none");
+        
         $("#messages").append(
           `<div class="text-left ml-2 recieved_msg">${dict.message}</div>`
         );
@@ -97,7 +100,7 @@ $(document).ready(function () {
         window.location.href = data.url;
       });
 
-      socket.on("change_status", function (data) {
+      socket.on("change_video_status", function (data) {
         userId = "#" + data.userId + " ";
 
         if (data.status) {
@@ -106,6 +109,16 @@ $(document).ready(function () {
         } else {
           $(userId + "video").css("display", "none");
           $(userId + ".overlay").css("display", "flex");
+        }
+      });
+
+      socket.on("change_audio_status", function (data) {
+        userId = "#" + data.userId + " ";
+        
+        if (data.status) {
+          $(userId + ".mic").css("display", "none");
+        } else {
+          $(userId + ".mic").css("display", "flex");
         }
       });
     });
@@ -119,7 +132,6 @@ $(document).ready(function () {
   myPeer.on("open", function (id) {
     sender = id;
     socket.emit("get_clients", { roomId: roomId, userId: id });
-    // socket.emit('join_room', { roomId: roomId, userId: id });
   });
 
   socket.on("detect-status", function (data) {
@@ -148,6 +160,14 @@ $(document).ready(function () {
 
     $.cookie("audio_" + username, myVideoStream.getAudioTracks()[0].enabled);
     $("#audio").html(audio_map.get(!audio_enabled));
+
+    display("#sender .mic", audio_enabled)
+
+    socket.emit("toggle_audio", {
+      roomId: roomId,
+      userId: myPeer.id,
+      status: !audio_enabled,
+    });
   });
 
   $("#video").click(function () {
@@ -178,6 +198,19 @@ $(document).ready(function () {
     socket.emit("leave", { roomId: roomId });
   });
 
+  $("#send_msg").click(function(){
+    $("#intro").removeClass("d-flex");
+    $("#intro").addClass("d-none");
+
+    let text = $("#chat_message");
+    if (text.val().length !== 0) {
+      socket.emit("message", { message: text.val(), room: roomId });
+      $("#messages").append(`<div class="sent_msg">${text.val()}</div>`);
+      scrolltoBottom();
+      text.val("");
+    }
+  });
+
   window.onunload = function (e) {
     socket.emit("leave", { roomId: roomId });
   };
@@ -191,8 +224,9 @@ const connectToNewUser = function (userId, stream) {
   console.log(userId);
 
   const call = myPeer.call(userId, stream);
-  socket.emit("initial_video", {
+  socket.emit("initial_status", {
     video: $.cookie("video_" + username) === "true",
+    audio: $.cookie("audio_" + username) === "true"
   });
 
   const video = document.createElement("video");
@@ -203,7 +237,7 @@ const connectToNewUser = function (userId, stream) {
 
   // Recipient's Video Stream
   call.on("stream", (userVideoStream) => {
-    addVideoStream(div, userVideoStream, reciever.video);
+    addVideoStream(div, userVideoStream, reciever.video, reciever.audio);
   });
 
   call.on("close", () => {
@@ -214,10 +248,16 @@ const connectToNewUser = function (userId, stream) {
 };
 
 const createVideoElement = function (video) {
+  const bool = video.id == "sender"
   const temp_id = video.id == "sender" ? myPeer.id : video.id;
 
   const myDiv_parent = document.createElement("div");
   myDiv_parent.classList.add("content");
+
+  const img = document.createElement("img")
+  img.src = `${mic_url}`
+  img.classList.add("mic")
+  img.style = bool ? "z-index: 3; position: relative; width:30px; height:30px; bottom: 30px;" : "z-index: 3; position: relative; width:40px; height:40px; bottom: 40px;"
 
   $.ajax({
     url: "../ajax/get_data/",
@@ -232,21 +272,28 @@ const createVideoElement = function (video) {
 
       const myDiv_child = document.createElement("div");
       myDiv_child.classList.add("overlay");
-      myDiv_child.innerHTML = `<img src="${src}">\
+
+      if (bool) {
+        myDiv_child.innerHTML = `<img src="${src}" style="width:30%;height:30%">\
                 <h6>${content}</h6>`;
+      }
+      else {
+        myDiv_child.innerHTML = `<img src="${src}" style="width:20%;height:20%">\
+                <h5>${content}</h5>`;
+      }
 
       myDiv_parent.append(myDiv_child);
       myDiv_parent.append(video);
-
-      // myDiv_parent.classList.add(video.classList.item(0))
+      myDiv_parent.append(img);
     },
   });
   return myDiv_parent;
 };
 
-const addVideoStream = function (div, stream, status = null) {
+const addVideoStream = function (div, stream, video_status = null, audio_status = null) {
   video = div.getElementsByTagName("video")[0];
   overlay = div.getElementsByClassName("overlay")[0];
+  mic = div.getElementsByClassName("mic")[0];
 
   if (video.hasAttribute("id")) {
     div.setAttribute("id", video.id);
@@ -258,14 +305,18 @@ const addVideoStream = function (div, stream, status = null) {
       video.play();
     });
 
-    if (status != null) {
-      if (status) {
+    if (video_status != null) {
+      if (video_status) {
         video.style.display = "flex";
         overlay.style.display = "none";
       } else {
         video.style.display = "none";
         overlay.style.display = "flex";
       }
+    }
+
+    if (audio_status != null) {
+      mic.style.display = (audio_status) ? "none" : "block"
     }
 
     if (div.id == "sender") {
