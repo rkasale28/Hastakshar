@@ -97,6 +97,7 @@ def forgot_submit(request):
 		user = hUser.objects.get(username=username)
 		user.set_password(pwd)
 		user.save()
+		messages.success(request, 'Password reset successfully')
 		return redirect('/login')
 	else:
 		return redirect('/login')
@@ -127,3 +128,43 @@ def email(request):
 
 def view_profile(request):	
 	return render(request,'main/view_profile.html')
+
+def update_profile_pic_submit(request):
+	if request.method == 'POST':
+		initial_profile_pic=request.user.user.profile_picture.url
+		initial_profile_pic=initial_profile_pic.replace('/media/', '')
+		profile_pic=request.FILES['profile_picture'] if 'profile_picture' in request.FILES else initial_profile_pic
+		
+		profile = User.objects.get(user=request.user)
+		profile.profile_picture=profile_pic
+		profile.save()
+		return redirect('/view_profile')
+	else:
+		return redirect('/view_profile')
+
+def reset_password_submit(request):
+	if (request.method=='POST'):
+		username = request.user.username
+		pwd = request.POST["password1"]
+
+		user = hUser.objects.get(username=username)
+		user.set_password(pwd)
+		user.save()
+
+		messages.success(request, 'Password reset successfully. Please login with new password.')
+		return redirect('/login')
+	else:
+		return redirect('/view_profile')
+
+def update_email_submit(request):
+	if (request.method=='POST'):
+		username = request.POST["username"]
+		mail = request.POST["email"]
+		
+		user = hUser.objects.get(username=username)
+		user.email = mail
+		user.save()
+
+		return redirect('/view_profile')
+	else:
+		return redirect('/view_profile')

@@ -29,6 +29,9 @@ urlpatterns = [
     path('forgot_password/',views.forgot_password,name="forgot_password"),
     path('forgot_submit',views.forgot_submit,name="forgot_submit"),
     path('view_profile/',views.view_profile,name="view_profile"),
+    path('view_profile/update_profile_pic_submit/',views.update_profile_pic_submit,name="update_profile_pic_submit"),
+    path('view_profile/reset_password_submit/',views.reset_password_submit,name="reset_password_submit"),
+    path('view_profile/update_email_submit/',views.update_email_submit,name="update_email_submit"),
 
     path('ajax/validate_email/', ajax.validate_email, name='validate_email'),
     path('ajax/validate_username/', ajax.validate_username, name='validate_username'),
@@ -36,5 +39,6 @@ urlpatterns = [
     path('ajax/validate_username_exists/', ajax.validate_username_exists, name='validate_username_exists'),
     path('ajax/get_email/', ajax.get_email, name='get_email'),
     path('ajax/get_data/', ajax.get_data, name='get_data'),
-    path('ajax/validate_roomcode/', ajax.validate_roomcode, name='validate_roomcode'),    
+    path('ajax/validate_roomcode/', ajax.validate_roomcode, name='validate_roomcode'), 
+    path('ajax/validate_reset_email/', ajax.validate_reset_email, name='validate_reset_email'),
 ]

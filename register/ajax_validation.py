@@ -58,7 +58,7 @@ def validate_username_exists(request):
 	
 	return JsonResponse(data)
 
-def get_email(request):
+def get_email(request):	
 	username = request.GET.get('username', None)
 	user = User.objects.get(username=username)
 	
@@ -86,6 +86,19 @@ def validate_roomcode(request):
 	data = {
 		'special_character': bool(set('[~!-@#$%^&*()_+{}":;\']+$').intersection(roomcode)),
 		'length' : (len(roomcode)!=32)
+    }
+	
+	return JsonResponse(data)
+
+def validate_reset_email(request):
+	username = request.GET.get('username', None)
+	email = request.GET.get('email', None)
+
+	user = User.objects.get(username=username)
+
+	data = {
+		'invalid' : not (len(email)==0 or valid_email(email)),
+		'same' : email == user.email
     }
 	
 	return JsonResponse(data)

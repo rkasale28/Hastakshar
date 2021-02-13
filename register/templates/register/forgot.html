@@ -31,7 +31,7 @@
     <div class="main">
         <div class="row justify-content-center">
             <div class="col-8">
-                <h3 style="text-align:center;">Rest your password to be able keep in touch with us...</h3>
+                <h3 style="text-align:center;">Reset your password to be able keep in touch with us...</h3>
                 <br>
                 <form method="POST" action="../forgot_submit" class="form-group" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -127,9 +127,6 @@
                     <p>Nahh, I remember...I'll <a href="/login/">Login instead</a>!</p>
                 </div>
 
-
-
-
             </div>
         </div>
     </div>
@@ -138,6 +135,7 @@
     </footer>
 
     <script type="text/javascript" src="{%static 'js/common.js'%}"></script>
+    <script type="text/javascript" src="{%static 'js/forgot.js'%}"></script>
     <script type="text/javascript" src="{%static 'validation/forgot.js'%}"></script>
 </body>
 

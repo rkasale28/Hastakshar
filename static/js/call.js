@@ -274,11 +274,11 @@ const createVideoElement = function (video) {
       myDiv_child.classList.add("overlay");
 
       if (bool) {
-        myDiv_child.innerHTML = `<img src="${src}" style="width:30%;height:30%">\
+        myDiv_child.innerHTML = `<img src="${src}" style="width:120px;height:120px; object-fit: cover">\
                 <h6>${content}</h6>`;
       }
       else {
-        myDiv_child.innerHTML = `<img src="${src}" style="width:20%;height:20%">\
+        myDiv_child.innerHTML = `<img src="${src}" style="width:120px;height:120px; object-fit: cover">\
                 <h5>${content}</h5>`;
       }
 
