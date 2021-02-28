@@ -16,7 +16,7 @@ from rapidjson import dumps, UM_HEX
 import socketio
 
 basedir = os.path.dirname(os.path.realpath(__file__))
-sio = socketio.Server(async_mode=async_mode, logger=True, engineio_logger=True, cors_allowed_origins="*")
+sio = socketio.Server(async_mode=async_mode, logger=True, engineio_logger=True)
 thread = None
 
 numClients = {}
@@ -137,14 +137,16 @@ def join_room(sid,message):
     @sio.event
     def initial_status(sid, data):
         sio.emit('detect-status', data=data,room=roomId,skip_sid=sid)
-    
+
     @sio.event
     def toggle_video(sid, data):
         sio.emit('change_video_status', data=data,room=data['roomId'],skip_sid=sid)
     
     @sio.event
     def toggle_audio(sid, data):
-        sio.emit('change_audio_status', data=data,room=data['roomId'],skip_sid=sid)
+        sio.emit('change_audio_status', data=data,room=data['roomId'],skip_sid=sid)    
+
+
 
 
 

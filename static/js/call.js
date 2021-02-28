@@ -1,10 +1,14 @@
 var audio_map = new Map([
   [true, `<img src="../static/images/mic.png" width="45%" height="45%">`],
-  [false, `<img src="../static/images/mic_mute.png" width="45%" height="45%">`],
+  [false, `<img src="../static/images/mic_mute.png" width="45%" height="45%">`]
 ]);
 var video_map = new Map([
   [true, `<img src="../static/images/video.png" width="45%" height="45%">`],
-  [false, `<img src="../static/images/video-off.png" width="45%" height="45%">`],
+  [false, `<img src="../static/images/video-off.png" width="45%" height="45%">`]
+]);
+var isl_map = new Map([
+  [true, `Start Interpretation`],
+  [false, `Stop Interpretation`]
 ]);
 const peers = {};
 
@@ -12,6 +16,7 @@ const socket = io('/');
 
 var audio_enabled = $.cookie("audio_" + username) === "true";
 var video_enabled = $.cookie("video_" + username) === "true";
+var isl_enabled = $.cookie("isl_" + username) === "true";
 
 let sender, reciever;
 
@@ -75,10 +80,10 @@ $(document).ready(function () {
 
       let text = $("#chat_message");
       $("#chat_message").keydown(function (e) {
-        if (e.which == 13 && text.val().length !== 0) {          
+        if (e.which == 13 && text.val().length !== 0) {
           $("#intro").removeClass("d-flex");
           $("#intro").addClass("d-none");
-          
+
           socket.emit("message", { message: text.val(), room: roomId });
           $("#messages").append(`<div class="sent_msg">${text.val()}</div>`);
           scrolltoBottom();
@@ -89,7 +94,7 @@ $(document).ready(function () {
       socket.on("createMessage", function (dict) {
         $("#intro").removeClass("d-flex");
         $("#intro").addClass("d-none");
-        
+
         $("#messages").append(
           `<div class="text-left ml-2 recieved_msg">${dict.message}</div>`
         );
@@ -106,15 +111,32 @@ $(document).ready(function () {
         if (data.status) {
           $(userId + "video").css("display", "flex");
           $(userId + ".overlay").css("display", "none");
+
+          isl_enabled = $.cookie("isl_" + username) === "true";
+          $("#isl").html(isl_map.get(!isl_enabled));
+          $("#isl").css("display", "block");
+
+          if (!isl_enabled){
+            $("#captions").css("display", "none");
+          }else{
+            $("#captions").css("display", "flex");
+          }
         } else {
           $(userId + "video").css("display", "none");
           $(userId + ".overlay").css("display", "flex");
+
+          $.cookie("isl_" + username, false);
+          $("#captions").css("display", "none");
+
+          isl_enabled = $.cookie("isl_" + username) === "true";
+          $("#isl").html(isl_map.get(isl_enabled))
+          $("#isl").css("display", "none");
         }
       });
 
       socket.on("change_audio_status", function (data) {
         userId = "#" + data.userId + " ";
-        
+
         if (data.status) {
           $(userId + ".mic").css("display", "none");
         } else {
@@ -124,6 +146,8 @@ $(document).ready(function () {
     });
 
   socket.on("user-disconnected", function (dict) {
+    $("#captions").css("display", "none");
+    $("#isl").css("display", "none")
     userId = dict.userId;
     if (peers[userId]) peers[userId].close();
   });
@@ -192,13 +216,22 @@ $(document).ready(function () {
     });
   });
 
+  $("#isl").click(function () {
+    isl_enabled = $.cookie("isl_" + username) === "true";
+    $.cookie("isl_" + username, !isl_enabled);
+    $("#isl").html(isl_map.get(isl_enabled));
+
+    capture()
+  })
+
   $("#leave_room").click(function () {
     $.removeCookie("audio_" + username);
     $.removeCookie("video_" + username);
+    $.removeCookie("isl_" + username);
     socket.emit("leave", { roomId: roomId });
   });
 
-  $("#send_msg").click(function(){
+  $("#send_msg").click(function () {
     $("#intro").removeClass("d-flex");
     $("#intro").addClass("d-none");
 
@@ -215,6 +248,7 @@ $(document).ready(function () {
     socket.emit("leave", { roomId: roomId });
   };
 });
+
 const scrolltoBottom = () => {
   var d = $("#chat_section");
   d.scrollTop(d.prop("scrollHeight"));
@@ -257,8 +291,8 @@ const createVideoElement = function (video) {
   const img = document.createElement("img")
   img.src = `${mic_url}`
   img.classList.add("mic")
-  img.style = bool ? "z-index: 3; position: relative; width:30px; height:30px; bottom: 30px;" : "z-index: 3; position: relative; width:40px; height:40px; bottom: 40px;"
-
+  img.style = bool ? "width:30px; height:30px;" : "width:40px; height:40px;"
+  
   $.ajax({
     url: "../ajax/get_data/",
     data: {
@@ -284,7 +318,21 @@ const createVideoElement = function (video) {
 
       myDiv_parent.append(myDiv_child);
       myDiv_parent.append(video);
-      myDiv_parent.append(img);
+
+      myDiv_child2 = document.createElement('div')
+      myDiv_child2.style = bool ? "z-index:3; position: relative; bottom: 30px" : "display: flex; flex-direction:row; z-index:3 ; position: relative; bottom: 40px"
+      myDiv_child2.append(img);
+
+      if (!bool) {    
+        const overlayText = document.createElement("h6");
+        overlayText.id = "captions";
+        overlayText.classList.add("overlayText")
+        overlayText.innerHTML = 'Captions will appear here';
+        
+        myDiv_child2.append(overlayText);
+      }
+
+      myDiv_parent.append(myDiv_child2);
     },
   });
   return myDiv_parent;
@@ -316,12 +364,29 @@ const addVideoStream = function (div, stream, video_status = null, audio_status 
     }
 
     if (audio_status != null) {
-      mic.style.display = (audio_status) ? "none" : "block"
+      mic.style.display = (audio_status) ? "none" : "inline"
     }
 
     if (div.id == "sender") {
       $("#sender-video").append(div);
     } else {
+      if (video_status != null) {
+        if (video_status) {
+          $("#isl").html(isl_map.get(!isl_enabled));          
+          $("#isl").css("display", "block");
+
+          if (!isl_enabled){
+            $("#captions").css("display", "none");
+          }else{
+            $("#captions").css("display", "flex");
+          }          
+        } else {
+          $("#isl").html(isl_map.get(!isl_enabled));
+          $("#isl").css("display", "none");
+          $("#captions").css("display", "none");
+        }
+      }
+
       $("#reciever-video").append(div);
     }
   }

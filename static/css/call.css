@@ -121,3 +121,24 @@ body {
   height: 10vh;
   width: 100%;
 }
+
+#isl{
+  position: absolute;
+  right: 0;
+  display: none;
+}
+
+.overlayText{
+  position: relative;
+  width: 100%;
+  top: 0;
+  display: none;
+  color: black;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: #6c757d;
+  margin: 0;
+  opacity: 0.8;
+  border-radius: 10px;
+}

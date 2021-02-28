@@ -57,6 +57,7 @@ $(document).ready(function () {
 
     $.cookie("audio_" + username, myVideoStream.getAudioTracks()[0].enabled);
     $.cookie("video_" + username, myVideoStream.getVideoTracks()[0].enabled);
+    $.cookie("isl_" + username, false);
     socket.emit("generate", { roomId: roomId });
     return false;
   });
