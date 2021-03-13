@@ -9,7 +9,7 @@ gevent-websocket==0.10.1
 greenlet==1.0.0
 gunicorn==20.0.4
 numpy==1.19.5
-object-detection==0.1
+object-detection-0.1==0.1
 opencv-python==4.5.1.48
 Pillow==8.1.0
 psycopg2==2.8.6
