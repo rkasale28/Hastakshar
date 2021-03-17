@@ -327,7 +327,7 @@ const createVideoElement = function (video) {
         const overlayText = document.createElement("h6");
         overlayText.id = "captions";
         overlayText.classList.add("overlayText")
-        overlayText.innerHTML = 'Captions will appear here';
+        overlayText.innerHTML = `<div class="dot-flashing"></div>`;
         
         myDiv_child2.append(overlayText);
       }
