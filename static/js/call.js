@@ -12,9 +12,7 @@ var isl_map = new Map([
 ]);
 const peers = {};
 
-var socket = io.connect(
-  window.location.protocol + "//" + document.domain + ":" + location.port
-);
+const socket = io('/');
 
 var audio_enabled = $.cookie("audio_" + username) === "true";
 var video_enabled = $.cookie("video_" + username) === "true";

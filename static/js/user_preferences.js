@@ -1,7 +1,5 @@
 $(document).ready(function () {
-  var socket = io.connect(
-    window.location.protocol + "//" + document.domain + ":" + location.port
-  );
+  const socket = io('/');
 
   let myVideoStream;
 
