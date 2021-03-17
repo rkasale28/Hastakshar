@@ -113,6 +113,14 @@ body {
   border-radius: 100px;
 }
 
+#isl {
+  position: absolute;
+  right: 1%; 
+  bottom: 16px;
+  border-radius: 100px;  
+  display: none;
+}
+
 .footer {
   position: fixed;
   bottom: 0px;
@@ -122,18 +130,13 @@ body {
   width: 100%;
 }
 
-#isl{
-  position: absolute;
-  right: 0;
-  display: none;
-}
-
 .overlayText{
   position: relative;
   width: 100%;
+  height: 40px;
   top: 0;
   display: none;
-  color: black;
+  color: white;
   flex-grow: 1;
   justify-content: center;
   align-items: center;
@@ -141,4 +144,54 @@ body {
   margin: 0;
   opacity: 0.8;
   border-radius: 10px;
+}
+
+.dot-flashing {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #000000;
+  color: #000000;
+  animation: dotFlashing 1s infinite linear alternate;
+  animation-delay: .5s;
+}
+
+.dot-flashing::before, .dot-flashing::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-flashing::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #000000;
+  color: #000000;
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+
+.dot-flashing::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #000000;
+  color: #000000;
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 1s;
+}
+
+@keyframes dotFlashing {
+  0% {
+    background-color: #000000;
+  }
+  50%,
+  100% {
+    background-color: #ebe6ff;
+  }
 }
