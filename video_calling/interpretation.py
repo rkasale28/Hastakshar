@@ -19,7 +19,6 @@ def load_image_into_numpy_array(path):
     return np.array(Image.open(path))
 
 def interpret(request): 
-    print('AJAX Request received')
     dataURL = request.POST.get('dataURL')
     dataURL = dataURL.replace("data:image/jpeg;base64,", "")
     dataURL = dataURL.replace(" ", "+")
@@ -28,21 +27,15 @@ def interpret(request):
     with open('static/images/captured_image.jpeg', 'wb') as file_to_save:
         decoded_image_data = base64.decodebytes(base64_img_bytes)
         file_to_save.write(decoded_image_data)
-    print('Saved img')
-
+    
     image_np=load_image_into_numpy_array('static/images/captured_image.jpeg')
-    print('Converted to numpy array')
-
+    
     input_tensor=tf.convert_to_tensor(image_np)
-    print('Converted to tensor')
-        
+            
     input_tensor=input_tensor[tf.newaxis, ...]
-    print('Added new axis')
-
-    print ('Starting Detect Fn')
+        
     detections=detect_fn(input_tensor)
-    print('Detect fn ended')
-
+    
     num_detections = int(detections.pop('num_detections'))
     detections = {key: value[0, :num_detections].numpy()
                 for key, value in detections.items()}
@@ -51,20 +44,23 @@ def interpret(request):
     # detection_classes should be ints.
     detections['detection_classes'] = detections['detection_classes'].astype(np.int64)    
 
-    label_id_offset = 1
     image_np_with_detections = image_np.copy()  
 
     max_score = max(list(detections['detection_scores']))
     indexes = [k for k,v in enumerate(detections['detection_scores']) if (v == max_score)]
-    print('getting max score')
-
+    
     num_entities = len(indexes)
 
-    class_id = itemgetter(*indexes)(detections['detection_classes']) + label_id_offset
-    scores = itemgetter(*indexes)(detections['detection_scores'])
+    class_id = itemgetter(*indexes)(detections['detection_classes'])
+    
+    max_score = round(max_score * 100,2)
 
-    class_name = str(category_index[class_id]['name'])     
-    print('getting class name')   
+    if (max_score > 90):
+        class_name = str(category_index[class_id]['name']) 
+    else:
+        class_name = " "
+
+    print ('{} : {}%'.format(class_name, class_id, max_score))
     
     data = {
         "caption" : class_name

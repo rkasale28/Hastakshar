@@ -27,7 +27,6 @@ function start() {
     });
 
     var dataURL = canvas.toDataURL("image/jpeg", 1.0);
-
     $.ajax({
         type: 'POST',
         url: 'interpret',
