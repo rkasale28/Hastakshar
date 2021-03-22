@@ -19,45 +19,49 @@ def load_image_into_numpy_array(path):
     return np.array(Image.open(path))
 
 def interpret(request): 
-    dataURL = request.POST.get('dataURL')
-    dataURL = dataURL.replace("data:image/jpeg;base64,", "")
-    dataURL = dataURL.replace(" ", "+")
-    
-    base64_img_bytes = dataURL.encode('utf-8')
-    with open('static/images/captured_image.jpeg', 'wb') as file_to_save:
-        decoded_image_data = base64.decodebytes(base64_img_bytes)
-        file_to_save.write(decoded_image_data)
-    
-    image_np=load_image_into_numpy_array('static/images/captured_image.jpeg')
-    
-    input_tensor=tf.convert_to_tensor(image_np)
-            
-    input_tensor=input_tensor[tf.newaxis, ...]
+    try:
+        dataURL = request.POST.get('dataURL')
+        dataURL = dataURL.replace("data:image/jpeg;base64,", "")
+        dataURL = dataURL.replace(" ", "+")
         
-    detections=detect_fn(input_tensor)
-    
-    num_detections = int(detections.pop('num_detections'))
-    detections = {key: value[0, :num_detections].numpy()
-                for key, value in detections.items()}
-    detections['num_detections'] = num_detections
+        base64_img_bytes = dataURL.encode('utf-8')
+        with open('static/images/captured_image.jpeg', 'wb') as file_to_save:
+            decoded_image_data = base64.decodebytes(base64_img_bytes)
+            file_to_save.write(decoded_image_data)
+        
+        image_np=load_image_into_numpy_array('static/images/captured_image.jpeg')
+        
+        input_tensor=tf.convert_to_tensor(image_np)
+                
+        input_tensor=input_tensor[tf.newaxis, ...]
+            
+        detections=detect_fn(input_tensor)
+        
+        num_detections = int(detections.pop('num_detections'))
+        detections = {key: value[0, :num_detections].numpy()
+                    for key, value in detections.items()}
+        detections['num_detections'] = num_detections
 
-    # detection_classes should be ints.
-    detections['detection_classes'] = detections['detection_classes'].astype(np.int64)    
+        # detection_classes should be ints.
+        detections['detection_classes'] = detections['detection_classes'].astype(np.int64)    
 
-    image_np_with_detections = image_np.copy()  
+        image_np_with_detections = image_np.copy()  
 
-    max_score = max(list(detections['detection_scores']))
-    indexes = [k for k,v in enumerate(detections['detection_scores']) if (v == max_score)]
-    
-    num_entities = len(indexes)
+        max_score = max(list(detections['detection_scores']))
+        indexes = [k for k,v in enumerate(detections['detection_scores']) if (v == max_score)]
+        
+        num_entities = len(indexes)
 
-    class_id = itemgetter(*indexes)(detections['detection_classes'])
-    
-    max_score = round(max_score * 100,2)
+        class_id = itemgetter(*indexes)(detections['detection_classes'])
+        
+        max_score = round(max_score * 100,2)
 
-    if (max_score > 90):
-        class_name = str(category_index[class_id]['name']) 
-    else:
+        if (max_score > 90):
+            class_name = str(category_index[class_id]['name']) 
+        else:
+            class_name = " "
+    except:
+        print ("Exception occured")
         class_name = " "
 
     print ('{} : {}%'.format(class_name, class_id, max_score))
