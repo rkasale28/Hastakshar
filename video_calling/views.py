@@ -21,11 +21,6 @@ thread = None
 
 numClients = {}
 
-#Remove this
-def call_test(request):
-    return render(request,'call_test.html')
-#
-
 def index(request):
     global thread
     if thread is None:
