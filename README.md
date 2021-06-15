@@ -18,7 +18,7 @@ The web application is built using Django – an open-sourced web framework that
 <p align="center"><img width="50%" height="100%" src="https://github.com/rkasale28/BE-Project/blob/main/Readme%20Images/img1.png"></p>
 
 ### Implementation
-<p align="center"><img width="50%" height="100%" src="https://github.com/rkasale28/BE-Project/blob/main/Readme%20Images/img2.png"></p>
+<p align="center"><img width="60%" height="100%" src="https://github.com/rkasale28/BE-Project/blob/main/Readme%20Images/img2.png"></p>
 
 ### Results
 - With the followed work pipeline, 15 ISL gestures including double-handed ones can be interpreted over a live video call between users
